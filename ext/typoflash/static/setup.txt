@@ -1,0 +1,20 @@
+config.linkVars = flash
+
+[globalVar = GP:flash = 0]
+
+[else]
+lib.flash = USER
+lib.flash.userFunc =tx_typoflash_pi1->main_inline
+lib.flash.DIV_TAG = html_alternative
+#lib.flash.HOST_URL= http://alternative.com/
+#lib.flash.REMOTING_RELAY_SOCKET = alternative.com
+#lib.flash.REMOTING_RELAY_PORT = ???
+#lib.flash.RELAY_SERVER = relaysocket.php
+lib.flash.CODE_PAGE = true
+lib.flash.SCALE_MODE = noScale
+lib.flash.ALIGN = TL
+
+#we want this to initilaise at the end
+#page.10020 = USER
+#page.10020.userFunc = tx_typoflash_pi1->init_typoflashHistory
+[global]

@@ -1,0 +1,44 @@
+config.linkVars = flash
+
+[globalVar = GP:flash = 0]
+
+[else]
+#lib.flash = USER
+#lib.flash.userFunc =tx_typoflash_pi1->main_inline
+#lib.flash.DIV_TAG = "ht"+"ml"+"_"+"alter"+"native"
+#lib.flash.HOST_URL= http://alternative.com/
+#lib.flash.REMOTING_RELAY_SOCKET = alternative.com
+#lib.flash.REMOTING_RELAY_PORT = ???
+#lib.flash.RELAY_SERVER = relaysocket.php
+#lib.flash.CODE_PAGE = true
+#lib.flash.SCALE_MODE = noScale
+#lib.flash.ALIGN = TL
+
+#we want this to initilaise at the end
+#page.2020 = TEXT
+#page.2020.value = <script type="text/javascript">
+#page.2030 = TEXT
+#page.2030.value = initialize_typoflashHistory();
+#page.2060 = TEXT
+#page.2060.value = </script>
+[global]
+
+plugin.tx_typoflash_pi1 {
+	CMD = 
+	pidList = 
+	recursive = 
+}
+plugin.tx_typoflash_pi1.listView {
+	results_at_a_time = 
+	maxPages = 
+}
+  # Example of default set CSS styles (these go into the document header):
+plugin.tx_typoflash_pi1._CSS_DEFAULT_STYLE (
+  .tx-typoflash-pi1 H2 { margin-top: 0px; margin-bottom: 0px; }
+)
+  # Example of how to overrule LOCAL_LANG values for the plugin:
+plugin.tx_typoflash_pi1._LOCAL_LANG.default {
+  pi_list_searchBox_search = Search!
+}
+  # Example of how to set default values from TS in the incoming array, $this->piVars of the plugin:
+plugin.tx_typoflash_pi1._DEFAULT_PI_VARS.test = test

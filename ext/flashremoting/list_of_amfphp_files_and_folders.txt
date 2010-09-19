@@ -1,0 +1,24 @@
+This is a list of the Amfphp files and folders in the SWX folder.
+
+Amfphp files
+------------
+
+  * amf.php (gateway)
+  * globals.php
+  * json.php (gateway) 
+  * xmlrpc.php
+
+Amfphp folders
+--------------	
+
+  * browser/
+  * core/
+
+Folders shared with SWX
+-----------------------
+
+  * services/
+ 
+The Twitter API sample uses the core/shared/util/JSON.php to handle JSON deserialization. 
+
+Note: SWX currently uses a different config file (swx_config.php). This is included by 

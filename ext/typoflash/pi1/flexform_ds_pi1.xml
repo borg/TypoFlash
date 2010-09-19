@@ -1,0 +1,358 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+  <sheets>
+   <sDEF>
+    <ROOT>
+     <TCEforms>
+      <sheetTitle>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component</sheetTitle>
+     </TCEforms>
+     <type>array</type>
+      <el>
+       <tx_typoflash_template>
+	       <TCEforms>
+			<exclude>1</exclude>
+			<label>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_template</label>
+			<config>
+				<type>select</type>
+				<foreign_table>tx_typoflash_template</foreign_table>
+				<!--foreign_table_where>
+					AND fe_groups.pid=###STORAGE_PID### 
+					ORDER BY  fe_groups.title
+				</foreign_table_where-->
+				<foreign_table_where>
+					ORDER BY  tx_typoflash_template.name
+				</foreign_table_where>
+				<size>1</size>
+				<minitems>0</minitems>
+				<maxitems>1</maxitems>
+			 </config>
+	       </TCEforms>
+       </tx_typoflash_template>
+       
+		<target>
+        <TCEforms>
+         <label>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.target</label>
+         <config>
+          <type>input</type>
+          <size>30</size>
+         </config>
+        </TCEforms>
+       </target>   
+
+	   <conf>
+        <TCEforms>
+         <label>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.conf</label>
+         <config>
+          <type>input</type>
+          <size>30</size>
+         </config>
+        </TCEforms>
+       </conf> 
+
+
+      </el>
+     </ROOT>
+    </sDEF>	
+	
+	<content_records>
+    <ROOT>
+     <TCEforms>
+      <sheetTitle>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.content_records</sheetTitle>
+     </TCEforms>
+     <type>array</type>
+      <el>
+
+
+
+		<what_to_render>
+        <TCEforms>
+         <label>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.what_to_render</label>
+         <config>
+          <type>select</type>
+          <items type="array">
+           <numIndex index="0" type="array">
+            <numIndex index="0">LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.what_to_render.I.0</numIndex>
+            <numIndex index="1">0</numIndex>
+           </numIndex>
+           <numIndex index="1" type="array">
+            <numIndex index="0">LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.what_to_render.I.2</numIndex>
+            <numIndex index="1">1</numIndex>
+            </numIndex>
+          </items>
+          <minitems>0</minitems>
+          <maxitems>1</maxitems>
+		  <default>0</default>
+          <size>1</size>
+         </config>
+        </TCEforms>
+       </what_to_render>
+
+
+
+
+
+		<records>
+        <TCEforms>
+         <exclude>1</exclude>
+         <label>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.records_component</label>
+         <config>
+          <type>group</type>
+          <internal_type>db</internal_type>
+          <allowed>*</allowed>
+          <size>4</size>
+          <maxitems>100</maxitems>
+          <minitems>0</minitems>
+          <show_thumbs>1</show_thumbs>
+         </config>
+        </TCEforms>
+       </records>
+
+
+		<pages>
+        <TCEforms>
+         <exclude>1</exclude>
+         <label>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.storage</label>
+         <config>
+          <type>group</type>
+          <internal_type>db</internal_type>
+          <allowed>pages</allowed>
+          <size>3</size>
+          <maxitems>22</maxitems>
+          <minitems>0</minitems>
+          <show_thumbs>1</show_thumbs>
+         </config>
+        </TCEforms>
+       </pages>
+
+	   <tables>
+        <TCEforms>
+         <label>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.tables</label>
+         <config>
+          <type>input</type>
+          <size>30</size>
+         </config>
+        </TCEforms>
+       </tables> 
+
+		<recordLimit>
+        <TCEforms>
+         <label>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.recordLimit</label>
+         <config>
+          <type>input</type>
+          <size>5</size>
+         </config>
+        </TCEforms>
+       </recordLimit> 
+		
+		<orderBy>
+        <TCEforms>
+         <label>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.orderBy</label>
+         <config>
+          <type>select</type>
+          <items type="array">
+           <numIndex index="0" type="array">
+            <numIndex index="0"></numIndex>
+            <numIndex index="1"></numIndex>
+           </numIndex>
+           <numIndex index="1" type="array">
+            <numIndex index="0">LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.orderBy.I.1</numIndex>
+            <numIndex index="1">1</numIndex>
+            </numIndex>
+           <numIndex index="2" type="array">
+            <numIndex index="0">LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.orderBy.I.2</numIndex>
+            <numIndex index="1">2</numIndex>
+           </numIndex>
+           <numIndex index="3" type="array">
+            <numIndex index="0">LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.orderBy.I.3</numIndex>
+            <numIndex index="1">3</numIndex>
+           </numIndex>
+           <numIndex index="4" type="array">
+            <numIndex index="0">LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.orderBy.I.4</numIndex>
+            <numIndex index="1">4</numIndex>
+           </numIndex>
+           <numIndex index="5" type="array">
+            <numIndex index="0">LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.orderBy.I.5</numIndex>
+            <numIndex index="1">250</numIndex>
+           </numIndex>
+          </items>
+          <minitems>0</minitems>
+          <maxitems>1</maxitems>
+          <size>1</size>
+         </config>
+        </TCEforms>
+       </orderBy>
+
+       
+      </el>
+     </ROOT>
+    </content_records>
+
+ 
+
+
+
+  <non_flash>
+    <ROOT>
+     <TCEforms>
+      <sheetTitle>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.non_flash</sheetTitle>
+     </TCEforms>
+     <type>array</type>
+      <el>
+		
+		<what_to_render>
+        <TCEforms>
+         <label>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.non_flash_what_to_render</label>
+         <config>
+          <type>select</type>
+          <items type="array">
+           <numIndex index="0" type="array">
+            <numIndex index="0">LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.what_to_render.I.0</numIndex>
+            <numIndex index="1">0</numIndex>
+           </numIndex>
+           <numIndex index="1" type="array">
+            <numIndex index="0">LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.what_to_render.I.1</numIndex>
+            <numIndex index="1">1</numIndex>
+            </numIndex>
+           <numIndex index="2" type="array">
+            <numIndex index="0">LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.what_to_render.I.2</numIndex>
+            <numIndex index="1">2</numIndex>
+           </numIndex>
+          </items>
+          <minitems>0</minitems>
+          <maxitems>1</maxitems>
+		  <default>0</default>
+          <size>1</size>
+         </config>
+        </TCEforms>
+       </what_to_render>
+
+		<records>
+        <TCEforms>
+         <exclude>1</exclude>
+         <label>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.records</label>
+         <config>
+          <type>group</type>
+          <internal_type>db</internal_type>
+          <allowed>*</allowed>
+          <size>4</size>
+          <maxitems>100</maxitems>
+          <minitems>0</minitems>
+          <show_thumbs>1</show_thumbs>
+         </config>
+        </TCEforms>
+       </records>
+
+		<pages>
+        <TCEforms>
+         <exclude>1</exclude>
+         <label>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.storage</label>
+         <config>
+          <type>group</type>
+          <internal_type>db</internal_type>
+          <allowed>pages</allowed>
+          <size>3</size>
+          <maxitems>22</maxitems>
+          <minitems>0</minitems>
+          <show_thumbs>1</show_thumbs>
+         </config>
+        </TCEforms>
+       </pages>
+
+
+        <show_plugin_link>
+        <TCEforms>
+         <label>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.install_flash_link</label>
+         <config>
+          <type>check</type>
+         </config>
+        </TCEforms>
+       </show_plugin_link>
+
+       
+      </el>
+     </ROOT>
+    </non_flash>
+
+
+  <seo>
+    <ROOT>
+     <TCEforms>
+      <sheetTitle>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.seo</sheetTitle>
+     </TCEforms>
+     <type>array</type>
+      <el>
+		
+		<what_to_render>
+        <TCEforms>
+         <label>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.seo_what_to_render</label>
+         <config>
+          <type>select</type>
+          <items type="array">
+           <numIndex index="0" type="array">
+            <numIndex index="0">LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.what_to_render.I.3</numIndex>
+            <numIndex index="1">0</numIndex>
+            </numIndex>
+		   <numIndex index="1" type="array">
+            <numIndex index="0">LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.what_to_render.I.0</numIndex>
+            <numIndex index="1">1</numIndex>
+           </numIndex>
+           <numIndex index="2" type="array">
+            <numIndex index="0">LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.what_to_render.I.1</numIndex>
+            <numIndex index="1">2</numIndex>
+            </numIndex>
+			<numIndex index="3" type="array">
+            <numIndex index="0">LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.what_to_render.I.2</numIndex>
+            <numIndex index="1">3</numIndex>
+           </numIndex>
+          </items>
+          <minitems>0</minitems>
+          <maxitems>1</maxitems>
+		  <default>0</default>
+          <size>1</size>
+         </config>
+        </TCEforms>
+       </what_to_render>
+
+		<records>
+        <TCEforms>
+         <exclude>1</exclude>
+         <label>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.records</label>
+         <config>
+          <type>group</type>
+          <internal_type>db</internal_type>
+          <allowed>*</allowed>
+          <size>4</size>
+          <maxitems>100</maxitems>
+          <minitems>0</minitems>
+          <show_thumbs>1</show_thumbs>
+         </config>
+        </TCEforms>
+       </records>
+
+		<pages>
+        <TCEforms>
+         <exclude>1</exclude>
+         <label>LLL:EXT:typoflash/locallang_db.php:tx_typoflash_component.storage</label>
+         <config>
+          <type>group</type>
+          <internal_type>db</internal_type>
+          <allowed>pages</allowed>
+          <size>3</size>
+          <maxitems>22</maxitems>
+          <minitems>0</minitems>
+          <show_thumbs>1</show_thumbs>
+         </config>
+        </TCEforms>
+       </pages>
+       
+      </el>
+     </ROOT>
+    </seo>
+
+
+
+
+   </sheets>
+ </T3DataStructure>

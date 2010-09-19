@@ -1,0 +1,171 @@
+BODY{
+
+	margin:0px;
+	padding:0px;
+	text-align:left;
+	font:12px "Trebuchet MS",Verdana,Arial,Sans-serif;
+	color:#193441;
+	background:#FFFFFF;
+}
+
+a {  
+	font:12px "Trebuchet MS",Verdana,Arial,Sans-serif;
+	color: #66A552; 
+	text-decoration: underline;
+}
+
+
+a:hover {  
+	color: #66A552; 
+	background-color: #D1DBBD;
+	text-decoration: none;
+}
+
+#menu a{
+	font:12px "Trebuchet MS",Verdana,Arial,Sans-serif;
+	color: #193441; 
+	text-decoration: none;
+
+}
+
+#menu a:hover {  
+	background-color: transparent;
+	color: #99CC00;
+	text-decoration: none;
+}
+#logo{
+	position:absolute;
+	left:10px;
+	top:10px;
+}
+
+#menu{
+	background:#EFEFEF;
+	position:absolute;
+	left:10px;
+	top:10px;
+	width:250px;
+	padding:10px;
+	margin:10px;
+	border:1px solid #CCCCCC;
+}
+
+#categories{
+	background:#EFEFEF;
+float:right;
+	width:250px;
+	padding:10px;
+	margin:10px;
+	border:1px solid #CCCCCC;
+}
+
+.menu1-level2-no{
+	position:relative;
+	left:10px;
+}
+
+.menu1-level2-act,{
+	position:relative;
+	left:10px;
+	color:#99CC00;
+}
+
+
+.menu1-level3-no{
+	position:relative;
+	left:20px;
+}
+
+.menu1-level3-act{
+	position:relative;
+	left:20px;
+	color:#99CC00;
+}
+#html_alternative{
+
+}
+
+
+#content{
+	position:absolute;
+	left:300px;
+	top:10px;
+	width : 600px;
+	padding:10px;
+	text-align:justify;
+}
+
+#flash{
+	
+}
+#footer{
+	position:absolute;
+	left:100px;
+	top:500px;
+	width : 700px;
+	height:50px;
+	overflow:hidden;
+	padding:10px;
+	text-align:center;
+}
+
+p {  
+	font:12px "Trebuchet MS",Verdana,Arial,Sans-serif;
+	margin-top: 0em;
+	margin-left:10px;
+	color: #193441;
+}
+
+
+
+h1 {  
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 1.4em; 
+	font-style: normal; 
+	font-weight: bold; 
+	color: #193441;
+	margin-left:10px;
+}
+
+
+h2,h3,h4 {  
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 1.3em; 
+	font-style: normal; 
+	font-weight: bold; 
+	color: #193441;
+	margin-bottom: 0;
+	margin-top: 0;
+	margin-left:10px;
+}
+
+
+#content img{
+
+	float:left;
+	padding:10px;
+	border:0px;
+}
+TD.dots { 
+background-color: #193441; 
+vertical-align: top;
+}
+
+
+div.news-latest-item,div.news-list-item{
+	background:#EFEFEF;
+	margin-bottom:10px;
+	padding:10px;
+	border:1px solid #CCCCCC;
+}
+
+div.news-list-category, div.news-single-backlink,div.news-latest-category{
+	clear:both;
+}
+
+div.news-single-item{
+	background:#EFEFEF;
+	margin-bottom:10px;
+	padding:10px;
+	border:1px solid #CCCCCC;
+}

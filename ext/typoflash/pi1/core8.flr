@@ -1,0 +1,1921 @@
+movie 'C:\PROJECTS\HAVEATHINK.NET\haveathink.net\typo3conf\ext\typoflash\pi1\core8.swf' {
+// flash 8, total frames: 31, frame rate: 25 fps, 800x500 px, compressed, network access alowed
+
+  frame 1 {
+    var ExpressInstall = function () {
+      this.needsUpdate = (_root.MMplayerType == undefined) ? false : true;
+    };
+
+    ExpressInstall.prototype = {'init': function () {
+      if (this.needsUpdate) {
+        this.loadUpdater();
+        return true;
+      } else {
+        return false;
+      }
+    }, 'loadUpdater': function () {
+      System.security.allowDomain('fpdownload.macromedia.com');
+      this.updater = _root.createEmptyMovieClip('expressInstallHolder', 10000000);
+      var _self = this;
+      this.updater.installStatus = _self.onInstallStatus;
+      this.hold = this.updater.createEmptyMovieClip('hold', 1);
+      this.updater.onEnterFrame = function () {
+        if (typeof this.hold.startUpdate == 'function') {
+          _self.initUpdater();
+          this.onEnterFrame = null;
+        }
+      };
+
+      var v3 = Math.random();
+      this.hold.loadMovie('http://fpdownload.macromedia.com/pub/flashplayer/update/current/swf/autoUpdater.swf?' + v3);
+    }, 'initUpdater': function () {
+      this.hold.redirectURL = _root.MMredirectURL;
+      this.hold.MMplayerType = _root.MMplayerType;
+      this.hold.MMdoctitle = _root.MMdoctitle;
+      this.hold.startUpdate();
+    }, 'onInstallStatus': function (msg) {
+      if (msg == 'Download.Complete') {
+      } else {
+        if (msg == 'Download.Cancelled') {
+          getURL('javascript:alert('This content requires a more recent version of the Macromedia Flash Player.')', '');
+        } else {
+          if (msg == 'Download.Failed') {
+            getURL('javascript:alert('There was an error downloading the Flash Player update. Please try again later, or visit macromedia.com to download the latest version of the Flash plugin.')', '');
+          }
+        }
+      }
+    }};
+    var ExpressInstall = new ExpressInstall();
+    if (ExpressInstall.init()) {
+      stop();
+    }
+  }
+
+  movieClip 1 __Packages.net.typoflash.managers.FontManager {
+
+    #initclip
+      if (!_global.net) {
+        _global.net = new Object();
+      }
+      if (!_global.net.typoflash) {
+        _global.net.typoflash = new Object();
+      }
+      if (!_global.net.typoflash.managers) {
+        _global.net.typoflash.managers = new Object();
+      }
+      if (!_global.net.typoflash.managers.FontManager) {
+        var v1 = function () {
+          if (!net.typoflash.managers.FontManager._allowInstantiation) {
+            net.typoflash.utils.Debug.trace('Error: Instantiation failed: Use _global[\'TF\'][\'FONT_MANAGER\'] = FontManager.global instead of new FontManager().');
+            return undefined;
+          }
+          this._fontLoadMap = new Object();
+          this._urlToRef = new Object();
+          this._urlToMC = new Object();
+          this._textFormats = new Object();
+          this._fontInfo = new Object();
+          this._incrementId = 0;
+          this._fontManager_mc = _global.TF.LAYER.fonts.createEmptyMovieClip('fontManager_mc', _global.TF.LAYER.fonts.getNextHighestDepth());
+          this._fontManager_mc._visible = false;
+          mx.events.EventDispatcher.initialize(this);
+        };
+
+        net.typoflash.managers.FontManager = v1;
+        var v2 = v1.prototype;
+        v2.loadFont = function (filePath, isLast) {
+          var v3 = this._fontManager_mc.createEmptyMovieClip('fontLoad' + this._incrementId + '_mc', this._fontManager_mc.getNextHighestDepth());
+          ++this._incrementId;
+          var v4 = filePath.split('.');
+          v4 = v4[0] + '_lib.' + v4[1];
+          var v5 = {'url': v4, 'target': v3, 'name': 'Dynamic Font Library', 'listener': this};
+          _global.TF.LOAD_QUEUE.load(v5);
+          v3 = this._fontManager_mc.createEmptyMovieClip('fontLoad' + this._incrementId + '_mc', this._fontManager_mc.getNextHighestDepth());
+          ++this._incrementId;
+          v5 = {'url': filePath, 'target': v3, 'name': 'Dynamic Font', 'listener': this};
+          this._fontLoadMap[v3] = _global.TF.LOAD_QUEUE.load(v5);
+          this._urlToMC[v3] = filePath;
+          this._fontLoadMap[v3].isLast = isLast;
+        };
+
+        v2.onComplete = function (o) {
+          net.typoflash.utils.Debug.trace('Physically loaded: ' + o.target.getUrl());
+          var v2 = {};
+          v2.type = net.typoflash.managers.FontManager.EVENT_FONT_LOADED;
+          v2.target = this;
+          v2.item = o;
+          this.dispatchEvent(v2);
+        };
+
+        v2.getTextFormatByReferenceName = function (referenceName) {
+          if (this._textFormats[referenceName] != undefined) {
+            return this.copyTextFormat(this._textFormats[referenceName]);
+          }
+        };
+
+        v2.applyTextFormatByReferenceName = function (referenceName, field_txt, applyDefaultFormat) {
+          var v3 = this.getTextFormatByReferenceName(referenceName);
+          if (v3 == undefined) {
+            return false;
+          }
+          if (applyDefaultFormat == null) {
+            applyDefaultFormat = true;
+          }
+          var v2 = this.getInfo(referenceName);
+          field_txt.embedFonts = !this.isSystemFont(v3.font);
+          if (v2.fontSize != null && applyDefaultFormat) {
+            v3.size = v2.fontSize;
+          }
+          if (v2.antiAliasType != null && applyDefaultFormat) {
+            field_txt.antiAliasType = v2.antiAliasType;
+          }
+          if (v2.gridFitType != null && applyDefaultFormat) {
+            field_txt.gridFitType = v2.gridFitType;
+          }
+          if (v2.sharpness != null && applyDefaultFormat) {
+            field_txt.sharpness = v2.sharpness;
+          }
+          field_txt.setTextFormat(v3);
+          return true;
+        };
+
+        v2.applyNewTextFormatByReferenceName = function (referenceName, field_txt, applyDefaultFormat) {
+          var v3 = this.getTextFormatByReferenceName(referenceName);
+          if (v3 == undefined) {
+            return false;
+          }
+          if (applyDefaultFormat == null) {
+            applyDefaultFormat = true;
+          }
+          var v2 = this.getInfo(referenceName);
+          field_txt.embedFonts = !this.isSystemFont(v3.font);
+          if (v2.antiAliasType != null && applyDefaultFormat) {
+            field_txt.antiAliasType = v2.antiAliasType;
+          }
+          if (v2.gridFitType != null && applyDefaultFormat) {
+            field_txt.gridFitType = v2.gridFitType;
+          }
+          if (v2.sharpness != null && applyDefaultFormat) {
+            field_txt.sharpness = v2.sharpness;
+          }
+          if (v2.fontSize != null && applyDefaultFormat) {
+            v3.size = v2.fontSize;
+          }
+          field_txt.setNewTextFormat(v3);
+          return true;
+        };
+
+        v2.getInfo = function (ref) {
+          return this._fontInfo[ref];
+        };
+
+        v2.getFontReferenceNames = function () {
+          var v2 = new Array();
+          for (var v3 in this._textFormats) {
+            v2.push(v3);
+          }
+          return v2;
+        };
+
+        v2.getReferenceFromURL = function (filePath) {
+          var v2 = this._urlToRef[filePath];
+          if (v2 != null) {
+            return v2;
+          } else {
+            return false;
+          }
+        };
+
+        v2.registerFont = function (referenceName, field, sender_mc, infoObj) {
+          var v2 = this._fontLoadMap[sender_mc];
+          if (v2 != undefined) {
+            net.typoflash.utils.Debug.trace('FontManager.registerFont:  ' + referenceName);
+            var v5 = this._urlToMC[sender_mc];
+            this._urlToRef[v5] = referenceName;
+            this.registerTextFormat(referenceName, field, (v2.isLast == undefined) ? false : v2.isLast, infoObj);
+            if (v2.isLast) {
+              this.destroy(this._fontLoadMap[sender_mc]);
+              delete this._fontLoadMap[sender_mc];
+            }
+            return true;
+          }
+          return false;
+        };
+
+        v2.isSystemFont = function (fontName) {
+          switch (fontName.toLowerCase()) {
+              return false;
+            case '_sans':
+            case '_serif':
+            case '_typewriter':
+              return true;
+          }
+          return false;
+        };
+
+        v2.registerTextFormat = function (referenceName, field, isLastRegister, infoObj) {
+          var v3 = this.copyTextFormat(field.getTextFormat());
+          this._textFormats[referenceName] = v3;
+          this._fontInfo[referenceName] = infoObj;
+          var v2 = {};
+          v2.type = net.typoflash.managers.FontManager.EVENT_FONT_REGISTER;
+          v2.target = this;
+          v2.font = referenceName;
+          v2.textFormat = v3;
+          this.dispatchEvent(v2);
+          if (isLastRegister) {
+            v2.type = net.typoflash.managers.FontManager.EVENT_LAST_FONT_REGISTER;
+            this.dispatchEvent(v2);
+          }
+        };
+
+        v2.copyTextFormat = function (formatToCopy) {
+          var v1 = new TextFormat();
+          v1.font = formatToCopy.font;
+          v1.italic = formatToCopy.italic;
+          v1.bold = formatToCopy.bold;
+          return v1;
+        };
+
+        v2.destroy = function (o) {
+          _global.TF.LOAD_QUEUE.unload(o);
+        };
+
+        v1.__get__global = function () {
+          if (_global.TF.FONT_MANAGER != null) {
+            return _global.TF.FONT_MANAGER;
+          }
+          if (net.typoflash.managers.FontManager._instance == null) {
+            net.typoflash.managers.FontManager._allowInstantiation = true;
+            net.typoflash.managers.FontManager._instance = new net.typoflash.managers.FontManager();
+            net.typoflash.managers.FontManager._allowInstantiation = false;
+          }
+          return net.typoflash.managers.FontManager._instance;
+        };
+
+        v1.EVENT_FONT_LOADED = 'onFontLoaded';
+        v1.EVENT_FONT_REGISTER = 'onFontRegister';
+        v1.EVENT_LAST_FONT_REGISTER = 'onLastFontRegister';
+        v1._instance = null;
+        v1._allowInstantiation = false;
+        v1.addProperty('global', v1.__get__global, function () {});
+        ASSetPropFlags(net.typoflash.managers.FontManager.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 2 __Packages.net.typoflash.utils.Debug {
+
+    #initclip
+      if (!_global.net) {
+        _global.net = new Object();
+      }
+      if (!_global.net.typoflash) {
+        _global.net.typoflash = new Object();
+      }
+      if (!_global.net.typoflash.utils) {
+        _global.net.typoflash.utils = new Object();
+      }
+      if (!_global.net.typoflash.utils.Debug) {
+        var v1 = function () {};
+
+        net.typoflash.utils.Debug = v1;
+        var v2 = v1.prototype;
+        v1.trace = function (msg) {
+          if (_global.TF.COOKIE.data.debugEnabled) {
+            var v3 = new net.typoflash.utils.ReadableDate();
+            if (typeof msg == 'object') {
+              msg = mx.data.binding.ObjectDumper.toString(msg);
+            }
+            ++net.typoflash.utils.Debug.count;
+            var v5 = net.typoflash.utils.Debug.htmlHistory + '<font color=\'#ABC6AA\'>[' + v3.getTimeColonFormat() + ']</font> <font color=\'#000000\'>' + msg + '</font>';
+            var v4 = net.typoflash.utils.Debug.plainHistory + '[' + v3.getTimeColonFormat() + '] ' + msg;
+            if (typeof _global.TF.TEMPLATE.debug == 'function') {
+              net.typoflash.utils.Debug.hasDisplay = true;
+              _global.TF.TEMPLATE.debug(v5, v4);
+            }
+            if (_global.TF.DEBUG_WINDOW != null) {
+              net.typoflash.utils.Debug.hasDisplay = true;
+              _global.TF.DEBUG_WINDOW.addText(v5, v4);
+            } else {
+              trace('[' + v3.getTimeColonFormat() + '] ' + msg);
+            }
+            if (!net.typoflash.utils.Debug.hasDisplay) {
+              net.typoflash.utils.Debug.htmlHistory += '<font color=\'#ABC6AA\'>[' + v3.getTimeColonFormat() + ']</font> <font color=\'#000000\'>' + msg + '</font><br/>';
+              net.typoflash.utils.Debug.plainHistory += '[' + v3.getTimeColonFormat() + '] ' + msg;
+            } else {
+              net.typoflash.utils.Debug.htmlHistory = '';
+              net.typoflash.utils.Debug.plainHistory = '';
+            }
+          } else {
+            if (typeof msg == 'object') {
+              msg = mx.data.binding.ObjectDumper.toString(msg);
+            }
+            trace(msg);
+          }
+        };
+
+        v1.clear = function () {
+          net.typoflash.utils.Debug.htmlHistory = '';
+          net.typoflash.utils.Debug.plainHistory = '';
+          _global.TF.DEBUG_WINDOW.setText(' ', ' ');
+        };
+
+        v1.htmlHistory = '';
+        v1.plainHistory = '';
+        v1.count = 0;
+        v1.hasDisplay = false;
+        ASSetPropFlags(net.typoflash.utils.Debug.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 3 __Packages.net.typoflash.utils.ReadableDate {
+
+    #initclip
+      if (!_global.net) {
+        _global.net = new Object();
+      }
+      if (!_global.net.typoflash) {
+        _global.net.typoflash = new Object();
+      }
+      if (!_global.net.typoflash.utils) {
+        _global.net.typoflash.utils = new Object();
+      }
+      if (!_global.net.typoflash.utils.ReadableDate) {
+        var v1 = function (yearOrTimevalue, month, date, hour, minute, second, millisecond) {
+          super(yearOrTimevalue, month, date, hour, minute, second, millisecond);
+        };
+
+        net.typoflash.utils.ReadableDate = v1;
+        net.typoflash.utils.ReadableDate extends Date;
+        var v2 = v1.prototype;
+        v2.getPaddedSeconds = function () {
+          var v2 = this.getSeconds();
+          v2 = String(v2);
+          if (v2.length == 1) {
+            v2 = '0' + v2;
+          }
+          return v2;
+        };
+
+        v2.getPaddedMinutes = function () {
+          var v2 = this.getMinutes();
+          v2 = String(v2);
+          if (v2.length == 1) {
+            v2 = '0' + v2;
+          }
+          return v2;
+        };
+
+        v2.getPaddedHours = function () {
+          var v2 = this.getHours();
+          v2 = String(v2);
+          if (v2.length == 1) {
+            v2 = '0' + v2;
+          }
+          return v2;
+        };
+
+        v2.getPaddedDate = function () {
+          var v2 = this.getDate();
+          v2 = String(v2);
+          if (v2.length == 1) {
+            v2 = '0' + v2;
+          }
+          return v2;
+        };
+
+        v2.getPaddedMonth = function () {
+          var v2 = this.getMonth() + 1;
+          v2 = String(v2);
+          if (v2.length == 1) {
+            v2 = '0' + v2;
+          }
+          return v2;
+        };
+
+        v2.getMonthName = function () {
+          var v2 = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+          return v2[this.getMonth()];
+        };
+
+        v2.getDayName = function () {
+          var v2 = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+          return v2[this.getDay()];
+        };
+
+        v2.getDateSuffixed = function () {
+          var v2 = ['st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'st'];
+          return this.getDate() + v2[this.getDate() - 1];
+        };
+
+        v2.getReadable = function () {
+          if (this.getPaddedDate() / this.getPaddedDate() == 1) {
+            return this.getDayName() + ' the ' + this.getDateSuffixed() + ' of ' + this.getMonthName() + ', ' + this.getFullYear();
+          } else {
+            return 'n/a';
+          }
+        };
+
+        v2.getNewsFormat = function () {
+          if (this.getPaddedDate() / this.getPaddedDate() == 1) {
+            return this.getPaddedHours() + ':' + this.getPaddedMinutes() + '  ' + this.getPaddedDate() + '|' + this.getPaddedMonth() + '|' + this.getFullYear();
+          } else {
+            return 'n/a';
+          }
+        };
+
+        v2.getDatePipeFormat = function () {
+          if (this.getPaddedDate() / this.getPaddedDate() == 1) {
+            return this.getPaddedDate() + '|' + this.getPaddedMonth() + '|' + this.getFullYear();
+          } else {
+            return 'n/a';
+          }
+        };
+
+        v2.getDateSlashFormat = function () {
+          if (this.getPaddedDate() / this.getPaddedDate() == 1) {
+            return this.getPaddedDate() + '/' + this.getPaddedMonth() + '/' + this.getFullYear();
+          } else {
+            return 'n/a';
+          }
+        };
+
+        v2.getTimeColonFormat = function () {
+          if (this.getPaddedDate() / this.getPaddedDate() == 1) {
+            return this.getPaddedHours() + ':' + this.getPaddedMinutes() + ':' + this.getPaddedSeconds();
+          } else {
+            return 'n/a';
+          }
+        };
+
+        v2.getSymbianFormat = function () {
+          var v2 = new Date();
+          if (this.getPaddedDate() / this.getPaddedDate() == 1) {
+            if (this.getDate() == v2.getDate()) {
+              return this.getPaddedHours() + ':' + this.getPaddedMinutes();
+            } else {
+              return this.getPaddedDate() + '|' + this.getPaddedMonth();
+            }
+          } else {
+            return 'n/a';
+          }
+        };
+
+        ASSetPropFlags(net.typoflash.utils.ReadableDate.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 4 __Packages.mx.data.binding.ObjectDumper {
+
+    #initclip
+      if (!_global.mx) {
+        _global.mx = new Object();
+      }
+      if (!_global.mx.data) {
+        _global.mx.data = new Object();
+      }
+      if (!_global.mx.data.binding) {
+        _global.mx.data.binding = new Object();
+      }
+      if (!_global.mx.data.binding.ObjectDumper) {
+        var v1 = function () {
+          this.inProgress = new Array();
+        };
+
+        mx.data.binding.ObjectDumper = v1;
+        var v2 = v1.prototype;
+        v1.toString = function (obj, showFunctions, showUndefined, showXMLstructures, maxLineLength, indent) {
+          var v3 = new mx.data.binding.ObjectDumper();
+          if (maxLineLength == undefined) {
+            maxLineLength = 100;
+          }
+          if (indent == undefined) {
+            indent = 0;
+          }
+          return v3.realToString(obj, showFunctions, showUndefined, showXMLstructures, maxLineLength, indent);
+        };
+
+        v2.realToString = function (obj, showFunctions, showUndefined, showXMLstructures, maxLineLength, indent) {
+          var v8 = 0;
+          while (v8 < this.inProgress.length) {
+            if (this.inProgress[v8] == obj) {
+              return '***';
+            }
+            ++v8;
+          }
+          this.inProgress.push(obj);
+          ++indent;
+          var v16 = typeof obj;
+          var v5;
+          if (obj instanceof XMLNode && showXMLstructures != true) {
+            v5 = obj.toString();
+          } else {
+            if (obj instanceof Date) {
+              v5 = obj.toString();
+            } else {
+              if (v16 == 'object') {
+                var v4 = new Array();
+                if (obj instanceof Array) {
+                  v5 = '[';
+                  var v15 = 0;
+                  while (v15 < obj.length) {
+                    v4.push(v15);
+                    ++v15;
+                  }
+                } else {
+                  v5 = '{';
+                  for (var v15 in obj) {
+                    v4.push(v15);
+                  }
+                  v4.sort();
+                }
+                var v9 = '';
+                var v3 = 0;
+                while (v3 < v4.length) {
+                  var v6 = obj[v4[v3]];
+                  var v7 = true;
+                  if (typeof v6 == 'function') {
+                    v7 = showFunctions == true;
+                  }
+                  if (typeof v6 == 'undefined') {
+                    v7 = showUndefined == true;
+                  }
+                  if (v7) {
+                    v5 += v9;
+                    if (!(obj instanceof Array)) {
+                      v5 += v4[v3] + ': ';
+                    }
+                    v5 += this.realToString(v6, showFunctions, showUndefined, showXMLstructures, maxLineLength, indent);
+                    v9 = ', `';
+                  }
+                  ++v3;
+                }
+                if (obj instanceof Array) {
+                  v5 += ']';
+                } else {
+                  v5 += '}';
+                }
+              } else {
+                if (v16 == 'function') {
+                  v5 = 'function';
+                } else {
+                  if (v16 == 'string') {
+                    v5 = '"' + obj + '"';
+                  } else {
+                    v5 = String(obj);
+                  }
+                }
+              }
+            }
+          }
+          if (v5 == 'undefined') {
+            v5 = '-';
+          }
+          this.inProgress.pop();
+          if (v5.length >= maxLineLength) {
+            return mx.data.binding.ObjectDumper.replaceAll(v5, '`', '\n' + this.doIndent(indent));
+          }
+          return mx.data.binding.ObjectDumper.replaceAll(v5, '`', '');
+        };
+
+        v1.replaceAll = function (str, from, to) {
+          var v3 = str.split(from);
+          var v4 = '';
+          var v2 = '';
+          var v1 = 0;
+          while (v1 < v3.length) {
+            v4 += v2 + v3[v1];
+            v2 = to;
+            ++v1;
+          }
+          return v4;
+        };
+
+        v2.doIndent = function (indent) {
+          var v2 = '';
+          var v1 = 0;
+          while (v1 < indent) {
+            v2 += '     ';
+            ++v1;
+          }
+          return v2;
+        };
+
+        ASSetPropFlags(mx.data.binding.ObjectDumper.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 5 __Packages.mx.events.EventDispatcher {
+
+    #initclip
+      if (!_global.mx) {
+        _global.mx = new Object();
+      }
+      if (!_global.mx.events) {
+        _global.mx.events = new Object();
+      }
+      if (!_global.mx.events.EventDispatcher) {
+        var v1 = function () {};
+
+        mx.events.EventDispatcher = v1;
+        var v2 = v1.prototype;
+        v1._removeEventListener = function (queue, event, handler) {
+          if (queue != undefined) {
+            var v4 = queue.length;
+            var v1;
+            v1 = 0;
+            while (v1 < v4) {
+              var v2 = queue[v1];
+              if (v2 == handler) {
+                queue.splice(v1, 1);
+                return undefined;
+              }
+              ++v1;
+            }
+          }
+        };
+
+        v1.initialize = function (object) {
+          if (mx.events.EventDispatcher._fEventDispatcher == undefined) {
+            mx.events.EventDispatcher._fEventDispatcher = new mx.events.EventDispatcher();
+          }
+          object.addEventListener = mx.events.EventDispatcher._fEventDispatcher.addEventListener;
+          object.removeEventListener = mx.events.EventDispatcher._fEventDispatcher.removeEventListener;
+          object.dispatchEvent = mx.events.EventDispatcher._fEventDispatcher.dispatchEvent;
+          object.dispatchQueue = mx.events.EventDispatcher._fEventDispatcher.dispatchQueue;
+        };
+
+        v2.dispatchQueue = function (queueObj, eventObj) {
+          var v7 = '__q_' + eventObj.type;
+          var v4 = queueObj[v7];
+          if (v4 != undefined) {
+            var v5;
+            for (v5 in v4) {
+              var v1 = v4[v5];
+              var v3 = typeof v1;
+              if (v3 == 'object' || v3 == 'movieclip') {
+                if (v1.handleEvent != undefined) {
+                  v1.handleEvent(eventObj);
+                }
+                if (v1[eventObj.type] != undefined) {
+                  if (mx.events.EventDispatcher.exceptions[eventObj.type] == undefined) {
+                    v1[eventObj.type](eventObj);
+                  }
+                }
+              } else {
+                v1.apply(queueObj, [eventObj]);
+              }
+            }
+          }
+        };
+
+        v2.dispatchEvent = function (eventObj) {
+          if (eventObj.target == undefined) {
+            eventObj.target = this;
+          }
+          this[eventObj.type + 'Handler'](eventObj);
+          this.dispatchQueue(this, eventObj);
+        };
+
+        v2.addEventListener = function (event, handler) {
+          var v3 = '__q_' + event;
+          if (this[v3] == undefined) {
+            this[v3] = new Array();
+          }
+          _global.ASSetPropFlags(this, v3, 1);
+          mx.events.EventDispatcher._removeEventListener(this[v3], event, handler);
+          this[v3].push(handler);
+        };
+
+        v2.removeEventListener = function (event, handler) {
+          var v2 = '__q_' + event;
+          mx.events.EventDispatcher._removeEventListener(this[v2], event, handler);
+        };
+
+        v1._fEventDispatcher = undefined;
+        v1.exceptions = {'move': 1, 'draw': 1, 'load': 1};
+        ASSetPropFlags(mx.events.EventDispatcher.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 6 __Packages.net.typoflash.managers.LoadQueue {
+
+    #initclip
+      if (!_global.net) {
+        _global.net = new Object();
+      }
+      if (!_global.net.typoflash) {
+        _global.net.typoflash = new Object();
+      }
+      if (!_global.net.typoflash.managers) {
+        _global.net.typoflash.managers = new Object();
+      }
+      if (!_global.net.typoflash.managers.LoadQueue) {
+        var v1 = function (piTimeoutMs, piIntervalMs, piMinSteps) {
+          if (!net.typoflash.managers.LoadQueue._allowInstantiation) {
+            trace('Error: Instantiation failed: Use _global[\'TF\'][\'LOAD_QUEUE\'] = LoadQueue.global instead of new LoadQueue().');
+            return undefined;
+          }
+          this.iIntervalId = -1;
+          this.iTimeoutIntervalId = -1;
+          this.iBytesLoaded = 0;
+          this.iBytesTotal = 1;
+          this.iTimeoutMs = 0;
+          this.bTimeoutEnabled = true;
+          this.iIntervalMs = 0;
+          this.iStartTimeMs = 0;
+          this.iMinSteps = 1;
+          this.iCurrentStep = 1;
+          this.iId = 0;
+          this.itemNum = 0;
+          this.kbQueueTotal = 0;
+          this.kbQueueLoaded = 0;
+          this.aQueue = [];
+          this.setTimeoutMs(piTimeoutMs);
+          this.setIntervalMs(piIntervalMs);
+          this.setMinSteps(piMinSteps);
+          mx.events.EventDispatcher.initialize(this);
+        };
+
+        net.typoflash.managers.LoadQueue = v1;
+        var v2 = v1.prototype;
+        v2.load = function (p, pLoc, poListener, pSize, pMethod, pName) {
+          net.typoflash.utils.Debug.trace('LoaderClass.load ');
+          net.typoflash.utils.Debug.trace(arguments);
+          if (typeof p == 'object') {
+            var v4 = {'url': true, 'target': true, 'name': true, 'listener': true, 'method': true, 'filesize': true};
+            var v6 = false;
+            for (var v7 in p) {
+              if (v4[v7] !== true) {
+                net.typoflash.utils.Debug.trace('Warning: Unknown argument in LoadQueue.load. ' + v7 + ' is not a valid argument.');
+                v6 = true;
+              }
+            }
+            if (v6) {
+              var v5 = '';
+              for (v7 in v4) {
+                v5 += v7 + ', ';
+              }
+              v5 = v5.substr(0, v5.length - 2);
+              net.typoflash.utils.Debug.trace('Valid arguments for LoadQueue.load are: ' + v5);
+            }
+            return this.transload(p.url, p.target, p.listener, p.filesize, p.method, p.name);
+          } else {
+            return this.transload(p, pLoc, poListener, pSize, pMethod, pName);
+          }
+        };
+
+        v2.transload = function (psUrl, pLoc, poListener, pSize, pMethod, pName, pArgs) {
+          return this.enqueue.apply(this, [true].concat(arguments));
+        };
+
+        v2.observe = function (psUrl, pLoc, poListener, pSize, pMethod, pName, pArgs) {
+          return this.enqueue.apply(this, [false].concat(arguments));
+        };
+
+        v2.clear = function () {
+          this.dispatchEvent({'type': 'onQueueCleared', 'target': this});
+          this.aQueue.length = 0;
+          this.removeCurrent();
+          this.itemNum = 0;
+          this.kbQueueTotal = 0;
+          this.kbQueueLoaded = 0;
+          this.dispatchEvent({'type': 'onQueueChanged', 'target': this});
+          net.typoflash.utils.Debug.trace('LoadQueue cleared');
+        };
+
+        v2.removeCurrent = function () {
+          if (this.isLoading()) {
+            var v2 = this.targetToLoc();
+            if (this.checkLocation(v2)) {
+              v2.unloadMovie();
+              --this.itemNum;
+              this.kbQueueTotal -= Number(this.oCurrentItem.kbSize);
+            }
+            this.endTimeout();
+            this.endLoading();
+            this.dispatchEvent({'type': 'onQueueChanged', 'target': this});
+          }
+        };
+
+        v2.unload = function (qItem) {
+          var v3 = qItem.targetToLoc();
+          qItem.dispatchEvent({'type': 'onPreUnload', 'target': this, 'item': qItem});
+          if (this.checkLocation(v3)) {
+            --this.itemNum;
+            this.kbQueueTotal -= Number(qItem.kbSize);
+            this.endTimeout();
+            this.endLoading();
+            this.dispatchEvent({'type': 'onQueuePreUnload', 'target': this, 'item': qItem});
+          }
+          v3.unloadMovie();
+        };
+
+        v2.remove = function (pId) {
+          if (this.oCurrentItem.iId == pId) {
+            this.removeCurrent();
+            return true;
+          }
+          var v2 = 0;
+          while (v2 < this.aQueue.length) {
+            if (this.aQueue[v2].iId == pId) {
+              this.aQueue.splice(v2, 1);
+              --this.itemNum;
+              this.kbQueueTotal -= Number(this.aQueue[v2].kbSize);
+              this.dispatchEvent({'type': 'onQueueChanged', 'target': this});
+              return true;
+            }
+            ++v2;
+          }
+          return false;
+        };
+
+        v2.getTimeoutMs = function () {
+          return this.iTimeoutMs;
+        };
+
+        v2.setTimeoutMs = function (piMilliseconds) {
+          this.iTimeoutMs = this.checkIntGreaterZero(piMilliseconds, this.DEFAULT_TIMEOUT_MS);
+          if (this.iTimeoutIntervalId != -1) {
+            this.startTimeout();
+          }
+          return this.iTimeoutMs;
+        };
+
+        v2.disableTimeout = function () {
+          this.endTimeout();
+          this.bTimeoutEnabled = false;
+        };
+
+        v2.enableTimeout = function () {
+          this.bTimeoutEnabled = true;
+          this.startTimeout();
+        };
+
+        v2.getIntervalMs = function () {
+          return this.iIntervalMs;
+        };
+
+        v2.setIntervalMs = function (piMilliseconds) {
+          this.iIntervalMs = this.checkIntGreaterZero(piMilliseconds, this.DEFAULT_INTERVAL_MS);
+          if (this.isLoading()) {
+            clearInterval(this.iIntervalId);
+            this.iIntervalId = -1;
+            this.startInterval();
+          }
+          return this.iIntervalMs;
+        };
+
+        v2.getMinSteps = function () {
+          return this.iMinSteps;
+        };
+
+        v2.setMinSteps = function (piMinSteps) {
+          this.iMinSteps = this.checkIntGreaterZero(piMinSteps, this.DEFAULT_MIN_STEPS);
+          return this.iMinSteps;
+        };
+
+        v2.isLoading = function () {
+          return this.iIntervalId != -1;
+        };
+
+        v2.getBytesLoaded = function () {
+          var v2 = Math.min(this.iBytesLoaded, Math.floor(this.iBytesTotal * this.iCurrentStep / this.iMinSteps));
+          return isNaN(v2) ? 0 : v2;
+        };
+
+        v2.getBytesTotal = function () {
+          return this.iBytesTotal;
+        };
+
+        v2.getKBLoaded = function () {
+          return this.getBytesLoaded() >> 10;
+        };
+
+        v2.getKBTotal = function () {
+          return this.getBytesTotal() >> 10;
+        };
+
+        v2.getPercent = function () {
+          return this.getBytesLoaded() * 100 / this.iBytesTotal;
+        };
+
+        v2.getDuration = function () {
+          return getTimer() - this.iStartTimeMs;
+        };
+
+        v2.getSpeed = function () {
+          return Math.floor(this.getBytesLoaded() * 1000 / this.getDuration());
+        };
+
+        v2.getEstimatedTotalTime = function () {
+          return Math.floor(this.getBytesTotal() / this.getSpeed());
+        };
+
+        v2.getTarget = function () {
+          return this.oCurrentItem.target;
+        };
+
+        v2.getTargetObj = function () {
+          return (typeof this.oCurrentItem.target == 'object') ? this.oCurrentItem.target : eval(this.oCurrentItem.target);
+        };
+
+        v2.__get__mc = function () {
+          return this.getTargetObj();
+        };
+
+        v2.__get__name = function () {
+          return this.oCurrentItem._name;
+        };
+
+        v2.getUrl = function () {
+          return this.oCurrentItem.sUrl;
+        };
+
+        v2.getTotalNum = function () {
+          return this.itemNum;
+        };
+
+        v2.getPendingNum = function () {
+          return this.aQueue.length;
+        };
+
+        v2.getQueueKBLoaded = function () {
+          return Math.round(this.kbQueueLoaded + (this.getPercent() / 100) * this.oCurrentItem.kbSize);
+        };
+
+        v2.getQueueKBTotal = function () {
+          return this.kbQueueTotal;
+        };
+
+        v2.getQueuePercent = function () {
+          return Math.round((this.getQueueKBLoaded() / this.getQueueKBTotal()) * 100);
+        };
+
+        v2.broadcastOnQueueStart = function () {
+          this.dispatchEvent({'type': 'onQueueStart', 'target': this});
+        };
+
+        v2.broadcastOnQueueStop = function () {
+          this.dispatchEvent({'type': 'onQueueStop', 'target': this});
+        };
+
+        v2.broadcastOnLoadStart = function () {
+          if (this.oCurrentItem._name.length > 0 && _global.TF.IS_LIVE && _global.TF.CONF.LOADQUEUE_STATUS) {
+            getURL('javascript:window.status=\'Loading ' + this.oCurrentItem._name + '\';void(0);', '_top');
+          }
+          this.dispatchEvent({'type': 'onItemStart', 'target': this});
+          this.oCurrentItem.dispatchEvent({'type': 'onStart', 'target': this});
+        };
+
+        v2.broadcastOnLoadComplete = function (pbResult) {
+          if (this.oCurrentItem._name.length > 0 && _global.TF.IS_LIVE && _global.TF.CONF.LOADQUEUE_STATUS) {
+            getURL('javascript:window.status=\'Finished loading ' + this.oCurrentItem._name + '\';void(0);', '_top');
+          }
+          this.dispatchEvent({'type': 'onQueueChanged', 'target': this});
+          this.dispatchEvent({'type': 'onItemComplete', 'result': pbResult, 'target': this});
+          this.oCurrentItem.dispatchEvent({'type': 'onComplete', 'target': this});
+        };
+
+        v2.broadcastOnLoadTimeout = function () {
+          --this.itemNum;
+          this.kbQueueTotal -= Number(this.oCurrentItem.kbSize);
+          this.dispatchEvent({'type': 'onQueueChanged', 'target': this});
+          this.dispatchEvent({'type': 'onItemTimeout', 'target': this});
+          this.oCurrentItem.dispatchEvent({'type': 'onTimeout', 'target': this});
+        };
+
+        v2.broadcastOnLoadProgress = function () {
+          if (Number(this.oCurrentItem.pCallbackPercent) >= this.getPercent() && this.oCurrentItem.doneCallback != true) {
+            this.oCurrentItem.pCallback(this);
+            this.oCurrentItem.doneCallback = true;
+          }
+          this.dispatchEvent({'type': 'onQueueProgress', 'target': this});
+          this.oCurrentItem.dispatchEvent({'type': 'onProgress', 'target': this});
+        };
+
+        v2._load = function () {
+          this.startTimeout();
+          this.oCurrentItem.load();
+        };
+
+        v2._observe = function () {
+          this.iBytesTotal = 1;
+          this.iBytesLoaded = 0;
+          this.iCurrentStep = 1;
+          this.iStartTimeMs = getTimer();
+          this.funcWaitUntil = null;
+          this.broadcastOnLoadStart();
+          this.broadcastOnLoadProgress();
+          if (this.oCurrentItem.bDoLoad) {
+            this._load();
+          }
+        };
+
+        v2.enqueue = function (doLoad, psUrl, pLoc, poListener, pSize, pMethod, pName, pArgs) {
+          var v5 = this.checkUrl(psUrl, pLoc);
+          var v8 = this.locToTarget(pLoc);
+          if (v8 == null) {
+            if (doLoad) {
+              net.typoflash.utils.Debug.trace('Warning LoadQueue: Invalid location parameter: ' + pLoc);
+            } else {
+              net.typoflash.utils.Debug.trace('Warning: LoadQueue: Invalid location parameter: ' + pLoc);
+            }
+          }
+          var v4 = ++this.iId;
+          var v3 = new net.typoflash.managers.LoadQueueItem(v8, v5, doLoad, v4, poListener, pSize, pMethod, pName, pArgs);
+          this.aQueue.push(v3);
+          if (!this.isLoading()) {
+            this.startLoading();
+          }
+          ++this.itemNum;
+          if (Number(pSize) > 0) {
+            this.kbQueueTotal += Number(pSize);
+            this.dispatchEvent({'type': 'onQueueChanged', 'target': this});
+            return v3;
+          }
+          this.kbQueueTotal += 4;
+          this.dispatchEvent({'type': 'onQueueChanged', 'target': this});
+          return v3;
+        };
+
+        v2.checkUrl = function (psUrl, pLoc) {
+          if (typeof psUrl == 'string') {
+            return psUrl;
+          }
+          if (typeof pLoc._url == 'string') {
+            return pLoc._url;
+          }
+          return '';
+        };
+
+        v2.isQueueEmpty = function () {
+          return this.aQueue.length == 0;
+        };
+
+        v2.Next = function () {
+          this.oCurrentItem = this.aQueue.shift();
+          this._observe();
+        };
+
+        v2.startLoading = function () {
+          this.broadcastOnQueueStart();
+          this.startInterval();
+          this.Next();
+        };
+
+        v2.stopLoading = function () {
+          this.endInterval();
+          this.endTimeout();
+        };
+
+        v2.startTimeout = function () {
+          if (this.iTimeoutIntervalId != -1) {
+            clearInterval(this.iTimeoutIntervalId);
+          }
+          if (this.bTimeoutEnabled) {
+            this.iTimeoutIntervalId = setInterval(this, '_onTimeout', this.iTimeoutMs);
+          }
+        };
+
+        v2.endTimeout = function () {
+          if (this.iTimeoutIntervalId != -1) {
+            clearInterval(this.iTimeoutIntervalId);
+            this.iTimeoutIntervalId = -1;
+          }
+        };
+
+        v2._onTimeout = function () {
+          this.endTimeout();
+          this.broadcastOnLoadTimeout();
+          this.endLoading(false);
+        };
+
+        v2.locToTarget = function (loc) {
+          if (this.locIsNumber(loc)) {
+            return '_level' + loc;
+          }
+          if (this.locIsPath(loc)) {
+            return loc;
+          }
+          if (this.locIsLevel(loc)) {
+            return loc;
+          }
+          if (this.locIsMovieClip(loc)) {
+            return targetPath(loc);
+          }
+          if (this.locIsLoadableObject(loc)) {
+            return loc;
+          }
+          if (loc instanceof String && loc.length > 0) {
+            return loc;
+          }
+          return null;
+        };
+
+        v2.targetToLoc = function () {
+          return this.oCurrentItem.targetToLoc();
+        };
+
+        v2.locIsNumber = function (loc) {
+          return typeof loc == 'number';
+        };
+
+        v2.locIsPath = function (loc) {
+          return typeof loc == 'string' && typeof eval(loc) == 'movieclip' && (eval(loc) != _level0 || loc == '_level0');
+        };
+
+        v2.locIsLevel = function (loc) {
+          return loc.indexOf('_level') == 0 && !isNaN(loc.substring(6));
+        };
+
+        v2.locIsMovieClip = function (loc) {
+          return typeof eval(loc) == 'movieclip';
+        };
+
+        v2.locIsLoadableObject = function (loc) {
+          return typeof loc.getBytesTotal == 'function' && typeof loc.getBytesLoaded == 'function';
+        };
+
+        v2.startInterval = function () {
+          if (this.iIntervalId != -1) {
+            this.endInterval();
+          }
+          this.iIntervalId = setInterval(this, 'onInterval', this.iIntervalMs);
+        };
+
+        v2.endInterval = function () {
+          if (this.iIntervalId != -1) {
+            clearInterval(this.iIntervalId);
+            this.iIntervalId = -1;
+          }
+        };
+
+        v2.onInterval = function () {
+          var v2 = this.targetToLoc();
+          if (!this.checkLocation(v2)) {
+            return undefined;
+          }
+          if (!this.checkBytesTotal(v2)) {
+            return undefined;
+          }
+          if (!this.checkBytesLoaded(v2)) {
+            return undefined;
+          }
+          this.endTimeout();
+          this.broadcastOnLoadProgress();
+          this.checkComplete(v2);
+          ++this.iCurrentStep;
+        };
+
+        v2.checkLocation = function (poCurrentLoc) {
+          if (poCurrentLoc == undefined) {
+            this.broadcastOnLoadProgress();
+            return false;
+          }
+          return true;
+        };
+
+        v2.checkBytesTotal = function (poCurrentLoc) {
+          var v2 = poCurrentLoc.getBytesTotal();
+          if (v2 < 4) {
+            this.broadcastOnLoadProgress();
+            return false;
+          }
+          this.iBytesTotal = v2;
+          return true;
+        };
+
+        v2.checkBytesLoaded = function (poCurrentLoc) {
+          var v2 = poCurrentLoc.getBytesLoaded();
+          if (v2 < 1) {
+            this.broadcastOnLoadProgress();
+            return false;
+          }
+          this.iBytesLoaded = v2;
+          return true;
+        };
+
+        v2.checkComplete = function (poCurrentLoc) {
+          if (this.locIsMovieClip(this.oCurrentItem.target) && !this.propertiesAreInitialized(this.oCurrentItem.target) && this.checkProps) {
+            return false;
+          }
+          if (this.iBytesTotal > 10 && this.iBytesTotal - this.iBytesLoaded < 10 && this.iCurrentStep >= this.iMinSteps && (this.funcWaitUntil == null || this.funcWaitUntil(poCurrentLoc))) {
+            if (Number(this.oCurrentItem.kbSize) > 0) {
+              this.kbQueueLoaded += Number(this.oCurrentItem.kbSize);
+            }
+            this.endLoading(true);
+            return true;
+          }
+          return false;
+        };
+
+        v2.propertiesAreInitialized = function (pMc) {
+          pMc = eval(pMc);
+          var isReady = Boolean(pMc._width > 0);
+          return isReady;
+        };
+
+        v2.endCurrentLoading = function (pbResult) {
+          this.broadcastOnLoadComplete(pbResult);
+          this.oCurrentItem.removeListenerFrom(this);
+        };
+
+        v2.endLoading = function (pbResult) {
+          this.endCurrentLoading(pbResult);
+          if (this.isQueueEmpty()) {
+            this.endInterval();
+            this.broadcastOnQueueStop();
+          } else {
+            this.Next();
+          }
+        };
+
+        v2.checkIntGreaterZero = function (piValue, piDefaultValue) {
+          if (piValue == undefined || isNaN(piValue) || piValue <= 0) {
+            return piDefaultValue;
+          }
+          return piValue;
+        };
+
+        v1.__get__global = function () {
+          if (_global.TF.LOAD_QUEUE != null) {
+            return _global.TF.LOAD_QUEUE;
+          }
+          if (net.typoflash.managers.LoadQueue._instance == null) {
+            net.typoflash.managers.LoadQueue._allowInstantiation = true;
+            net.typoflash.managers.LoadQueue._instance = new net.typoflash.managers.LoadQueue();
+            net.typoflash.managers.LoadQueue._allowInstantiation = false;
+          }
+          return net.typoflash.managers.LoadQueue._instance;
+        };
+
+        v1._instance = null;
+        v1._allowInstantiation = false;
+        v2.DEFAULT_TIMEOUT_MS = 10000;
+        v2.DEFAULT_INTERVAL_MS = 100;
+        v2.DEFAULT_MIN_STEPS = 1;
+        v2.checkProps = false;
+        v1.addProperty('global', v1.__get__global, function () {});
+        v2.addProperty('mc', v2.__get__mc, function () {});
+        v2.addProperty('name', v2.__get__name, function () {});
+        ASSetPropFlags(net.typoflash.managers.LoadQueue.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 7 __Packages.net.typoflash.managers.LoadQueueItem {
+
+    #initclip
+      if (!_global.net) {
+        _global.net = new Object();
+      }
+      if (!_global.net.typoflash) {
+        _global.net.typoflash = new Object();
+      }
+      if (!_global.net.typoflash.managers) {
+        _global.net.typoflash.managers = new Object();
+      }
+      if (!_global.net.typoflash.managers.LoadQueueItem) {
+        var v1 = function (target, sUrl, doLoad, id, oListener, pSize, pMethod, pName, aArgs) {
+          this.target = target;
+          this.sUrl = sUrl;
+          this.bDoLoad = doLoad;
+          this.aArgs = aArgs;
+          this.iId = id;
+          this.oListener = oListener;
+          if (!Number(pSize) > 0) {
+            this.kbSize = 4;
+          } else {
+            this.kbSize = pSize;
+          }
+          this._method = pMethod;
+          this._name = pName;
+          mx.events.EventDispatcher.initialize(this);
+          this.addListener(oListener);
+        };
+
+        net.typoflash.managers.LoadQueueItem = v1;
+        var v2 = v1.prototype;
+        v2.load = function () {
+          var loc = this.target;
+          if (typeof loc.load == 'function') {
+            loc.load.apply(loc, [this.sUrl].concat(this.aArgs));
+          } else {
+            if (typeof loc.loadSound == 'function') {
+              loc.loadSound.apply(loc, [this.sUrl].concat(this.aArgs));
+            } else {
+              this.funcWaitUntil = this.waitUntilPropertiesAreInitialized;
+              if (this._method.toUpperCase() == 'POST') {
+                var tLoc = eval(loc);
+                tLoc.loadMovie(this.sUrl, 'POST');
+              } else {
+                if (this._method.toUpperCase() == 'GET') {
+                  var tLoc = eval(loc);
+                  tLoc.loadMovie(this.sUrl, 'GET');
+                } else {
+                  loadMovie(this.sUrl, loc);
+                }
+              }
+            }
+          }
+        };
+
+        v2.targetToLoc = function () {
+          return (typeof this.target == 'string') ? eval(this.target) : this.target;
+        };
+
+        v2.addListener = function (oListener) {
+          if (oListener != undefined) {
+            this.addEventListener('onStart', oListener);
+            this.addEventListener('onProgress', oListener);
+            this.addEventListener('onComplete', oListener);
+            this.addEventListener('onTimeout', oListener);
+            this.addEventListener('onPreUnload', oListener);
+          }
+        };
+
+        v2.removeListener = function () {
+          if (this.oListener != undefined) {
+            net.typoflash.utils.Debug.trace('trying to remove listener ' + this.target);
+          }
+        };
+
+        ASSetPropFlags(net.typoflash.managers.LoadQueueItem.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 8 __Packages.net.typoflash.managers.CoreEvents {
+
+    #initclip
+      if (!_global.net) {
+        _global.net = new Object();
+      }
+      if (!_global.net.typoflash) {
+        _global.net.typoflash = new Object();
+      }
+      if (!_global.net.typoflash.managers) {
+        _global.net.typoflash.managers = new Object();
+      }
+      if (!_global.net.typoflash.managers.CoreEvents) {
+        var v1 = function () {
+          if (!net.typoflash.managers.CoreEvents._allowInstantiation) {
+            trace('Error: Instantiation failed: Use _global[\'TF\'][\'CORE_EVENTS\'] = CoreEvents.global instead of new CoreEvents().');
+            return undefined;
+          }
+          mx.events.EventDispatcher.initialize(this.ED);
+        };
+
+        net.typoflash.managers.CoreEvents = v1;
+        var v2 = v1.prototype;
+        v2.addEventListener = function (type, obj) {
+          this.ED.addEventListener(type, obj);
+        };
+
+        v2.removeEventListener = function (obj) {
+          this.ED.removeEventListener(obj);
+        };
+
+        v2.dispatchEvent = function (obj) {
+          this.ED.dispatchEvent(obj);
+        };
+
+        v1.__get__global = function () {
+          if (net.typoflash.managers.CoreEvents._instance == null) {
+            net.typoflash.managers.CoreEvents._allowInstantiation = true;
+            net.typoflash.managers.CoreEvents._instance = new net.typoflash.managers.CoreEvents();
+            net.typoflash.managers.CoreEvents._allowInstantiation = false;
+          }
+          return net.typoflash.managers.CoreEvents._instance;
+        };
+
+        v1._instance = null;
+        v1._allowInstantiation = false;
+        v2.ED = {};
+        v1.addProperty('global', v1.__get__global, function () {});
+        ASSetPropFlags(net.typoflash.managers.CoreEvents.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 9 __Packages.net.typoflash.datahandling.Cookie {
+
+    #initclip
+      if (!_global.net) {
+        _global.net = new Object();
+      }
+      if (!_global.net.typoflash) {
+        _global.net.typoflash = new Object();
+      }
+      if (!_global.net.typoflash.datahandling) {
+        _global.net.typoflash.datahandling = new Object();
+      }
+      if (!_global.net.typoflash.datahandling.Cookie) {
+        var v1 = function (name) {
+          if (!net.typoflash.datahandling.Cookie._allowInstantiation) {
+            trace('Error: Instantiation failed: Use _global[\'TF\'][\'COOKIE\'] = Cookie.global instead of new Cookie().');
+            return undefined;
+          }
+          this.instance = SharedObject.getLocal(name);
+          this.instance.onStatus = function (infoObj) {
+            if (infoObj.code == 'SharedObject.Flush.Success') {
+              this.onLoad(true);
+            } else {
+              if (infoObj.code == 'SharedObject.Flush.Failed') {
+                this.onLoad(false);
+              }
+            }
+          };
+
+        };
+
+        net.typoflash.datahandling.Cookie = v1;
+        var v2 = v1.prototype;
+        v2.setCookie = function () {
+          var v2 = new Date();
+          this.instance.data.timeStamp = v2.getTime();
+          if (this.instance.flush() == false) {
+            System.showSettings(1);
+            trace('flush fail');
+          }
+        };
+
+        v2.clearCookie = function () {
+          for (var v2 in this.instance.data) {
+            this.instance.data[v2] = null;
+          }
+          this.setCookie();
+        };
+
+        v2.__get__data = function () {
+          return this.instance.data;
+        };
+
+        v2.getData = function (v) {
+          return this.instance.data[v];
+        };
+
+        v2.setData = function (n, v) {
+          this.instance.data[n] = v;
+          this.setCookie();
+        };
+
+        v1.__get__global = function () {
+          if (net.typoflash.datahandling.Cookie._instance == null) {
+            net.typoflash.datahandling.Cookie._allowInstantiation = true;
+            if (_global.TF.HOST_URL != null) {
+              net.typoflash.datahandling.Cookie._instance = new net.typoflash.datahandling.Cookie(escape(_global.TF.HOST_URL));
+            } else {
+              net.typoflash.datahandling.Cookie._instance = new net.typoflash.datahandling.Cookie('IWishIKnewAUniqueNAmeHEre');
+            }
+            net.typoflash.datahandling.Cookie._allowInstantiation = false;
+          }
+          return net.typoflash.datahandling.Cookie._instance;
+        };
+
+        v1._instance = null;
+        v1._allowInstantiation = false;
+        v2.addProperty('data', v2.__get__data, function () {});
+        v1.addProperty('global', v1.__get__global, function () {});
+        ASSetPropFlags(net.typoflash.datahandling.Cookie.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  frame 2 {
+    function onFontRegister(o) {
+      G.FONT_LIST.push(o);
+      var v1 = o.font;
+    }
+
+    function updateFlashHistory(loc) {
+      if (_global.TF.HISTORY_ENABLED) {
+        var v4 = loc.split('&');
+        var v2;
+        var v7 = {};
+        var v3 = 0;
+        while (v3 < v4.length) {
+          v2 = v4[v3].split('=');
+          if (v2[0] != '' && v2[0] != 'pageState' && v2[0] != 'tplState') {
+            v7[v2[0]] = v2[1];
+          } else {
+            if (v2[0] == 'tplState') {
+              var v6 = {'type': 'onExtTemplateState', 'state': v2[1]};
+              _global.TF.CORE_EVENTS.dispatchEvent(v6);
+              _global.TF.CURR_TEMPLATE_STATE_STR = v2[1];
+            } else {
+              if (v2[0] == 'pageState') {
+                var v6 = {'type': 'onExtPageState', 'state': v2[1]};
+                _global.TF.CORE_EVENTS.dispatchEvent(v6);
+                _global.TF.CURR_PAGE_STATE_STR = v2[1];
+              }
+            }
+          }
+          ++v3;
+        }
+        if (Number(v7.id) <= 0) {
+          v7.id = _global.TF.INIT_pOBJ.id;
+        }
+        if (String(_global.TF.PID) != String(v7.id) && (_global.TF.LANGUAGE != null || String(_global.TF.LANGUAGE) != String(v7.L)) && !_global.TF.ONLY_TMPL_STATE) {
+          v6 = {'type': 'onBrowserHistory', 'pObj': v7};
+          _global.TF.CORE_EVENTS.dispatchEvent(v6);
+        } else {
+          if (v7.id == null && !_global.TF.ONLY_TMPL_STATE) {
+            v6 = {'type': 'onBrowserHistory', 'pObj': _global.TF.INIT_pOBJ};
+            _global.TF.CORE_EVENTS.dispatchEvent(v6);
+          }
+        }
+      }
+    }
+
+    function externalEdit(key) {
+      _global.TF.CONTENT_EDITING.externalEdit(key);
+    }
+
+    function setAuthContext() {
+      menu = new ContextMenu();
+      for (var v1 in menu.builtInItems) {
+        menu.builtInItems[v1] = false;
+      }
+      menu.customItems.push(new ContextMenuItem('» Clear TypoFlash cache', clearCache));
+      if (C.data.editEnabled) {
+        editItem = new ContextMenuItem('» Turn off Edit mode', turnOffEdit);
+      } else {
+        editItem = new ContextMenuItem('» Turn on Edit mode', turnOnEdit);
+      }
+      menu.customItems.push(editItem);
+      if (C.data.debugEnabled) {
+        debugItem = new ContextMenuItem('» Turn off Debug mode', turnOffDebug);
+      } else {
+        debugItem = new ContextMenuItem('» Turn on Debug mode', turnOnDebug);
+      }
+      menu.customItems.push(debugItem);
+      lgt = new ContextMenuItem('» Log out of TypoFlash', logout);
+      menu.customItems.push(lgt);
+      if (C.data.soundEnabled != false) {
+        snd = new ContextMenuItem('» Mute all sounds', toggleSound);
+      } else {
+        snd = new ContextMenuItem('» Turn on sounds', toggleSound);
+      }
+      menu.customItems.push(snd);
+      var v2 = new ContextMenuItem('» Powered by TypoFlash', credit);
+      v2.separatorBefore = true;
+      menu.customItems.push(v2);
+    }
+
+    function setNonAuthContext() {
+      menu = new ContextMenu();
+      for (var v1 in menu.builtInItems) {
+        menu.builtInItems[v1] = false;
+      }
+      if (C.data.editEnabled) {
+        editItem = new ContextMenuItem('» Turn off Edit mode', turnOffEdit);
+        menu.customItems.push(editItem);
+      }
+      lgn = new ContextMenuItem('» Login to TypoFlash', loadEditor);
+      lgn.separatorBefore = true;
+      menu.customItems.push(lgn);
+      if (C.data.soundEnabled != false) {
+        snd = new ContextMenuItem('» Mute all sounds', toggleSound);
+      } else {
+        snd = new ContextMenuItem('» Turn on sounds', toggleSound);
+      }
+      menu.customItems.push(snd);
+      var v2 = new ContextMenuItem('» Powered by TypoFlash', credit);
+      v2.separatorBefore = true;
+      menu.customItems.push(v2);
+    }
+
+    function credit() {
+      getURL('http://typoflash.net', '_blank');
+    }
+
+    function clearCache() {
+      _global.TF.CONTENT_RENDERING.clearCache();
+    }
+
+    function turnOffDebug() {
+      _global.TF.COOKIE.setData('debugEnabled', 0);
+      _global.TF.LAYER.debug.unloadMovie();
+      debugItem.caption = '» Turn on Debug mode';
+      debugItem.onSelect = turnOnDebug;
+    }
+
+    function turnOnDebug() {
+      _global.TF.COOKIE.setData('debugEnabled', 1);
+      loadDebug();
+      debugItem.caption = '» Turn off Debug mode';
+      debugItem.onSelect = turnOffDebug;
+    }
+
+    function turnOffEdit() {
+      _global.TF.COOKIE.setData('editEnabled', 0);
+      var v2 = {};
+      v2.type = 'onEditStatus';
+      v2.status = false;
+      E.dispatchEvent(v2);
+    }
+
+    function turnOnEdit() {
+      _global.TF.COOKIE.setData('editEnabled', 1);
+      if (_global.TF.EDITOR == null) {
+        loadEditor();
+      }
+      var v2 = {};
+      v2.type = 'onEditStatus';
+      v2.status = true;
+      E.dispatchEvent(v2);
+    }
+
+    function loadDebug() {
+      _global.TF.LAYER.debug = root.createEmptyMovieClip('debug', depth.debug);
+      var v2 = _global.TF.LAYER.debug;
+      var v3 = {'url': _global.TF.HOST_URL + 'typo3conf/ext/typoflash/pi1/debug8.swf', 'target': v2, 'name': 'Debug window'};
+      _global.TF.LOAD_QUEUE.load(v3);
+    }
+
+    function loadEditor() {
+      _global.TF.LAYER.editor = root.createEmptyMovieClip('editor', depth.editor);
+      var v2 = _global.TF.LAYER.editor;
+      var v3 = {'url': _global.TF.HOST_URL + 'typo3conf/ext/typoflash/pi1/editor8.swf', 'target': v2, 'name': 'TypoFlash Editor'};
+      _global.TF.LOAD_QUEUE.load(v3);
+    }
+
+    function unloadEditor() {
+      _global.TF.LAYER.editor.unloadMovie();
+      _y = 0;
+    }
+
+    function toggleSound() {
+      var v2 = {};
+      v2.type = 'onSoundStatus';
+      if (_global.TF.COOKIE.data.soundEnabled != false) {
+        v2.status = false;
+      } else {
+        v2.status = true;
+      }
+      E.dispatchEvent(v2);
+    }
+
+    function onSoundStatus(o) {
+      if (_global.TF.COOKIE.data.soundEnabled != false) {
+        _global.TF.COOKIE.setData('soundEnabled', o.status);
+        stopAllSounds();
+        snd.caption = '» Turn on sounds';
+      } else {
+        _global.TF.COOKIE.setData('soundEnabled', 1);
+        snd.caption = '» Mute sounds';
+      }
+    }
+
+    function onBELoginStatus(obj) {
+      if (obj.status == true) {
+        setAuthContext();
+      } else {
+        if (obj.status != 'pending') {
+          setNonAuthContext();
+          turnOffEdit();
+        }
+      }
+    }
+
+    function onDebugStatus(obj) {
+      if (obj.status == true) {
+        turnOnDebug();
+      } else {
+        turnOffDebug();
+      }
+    }
+
+    function onEditStatus(obj) {
+      if (obj.status == true) {
+        editItem.caption = '» Turn off Edit mode';
+        editItem.onSelect = turnOffEdit;
+      } else {
+        editItem.caption = '» Turn on Edit mode';
+        editItem.onSelect = turnOnEdit;
+      }
+    }
+
+    function logout() {
+      _global.TF.EDITOR.logout();
+    }
+
+    _global.TF = {};
+    var G = _global.TF;
+    G.LAYER = {};
+    depth = {};
+    depth.tf = 0;
+    depth.root = 1;
+    depth.fonts = 5;
+    depth.assets = 2;
+    depth.bg = 5;
+    depth.template = 10;
+    depth.preloader = 20;
+    depth.editor = 30;
+    depth.debug = 40;
+    depth.swx = 234840;
+    G.LAYER.tf = this.createEmptyMovieClip('tf', depth.tf);
+    var tf = G.LAYER.tf;
+    G.LAYER.fonts = tf.createEmptyMovieClip('fonts', depth.fonts);
+    var fonts = G.LAYER.fonts;
+    G.LAYER.root = tf.createEmptyMovieClip('root', depth.root);
+    var root = G.LAYER.root;
+    G.LAYER.bg = root.createEmptyMovieClip('bg', depth.bg);
+    var bg = G.LAYER.bg;
+    G.CORE_EVENTS = net.typoflash.managers.CoreEvents.global;
+    var E = G.CORE_EVENTS;
+    G.LOAD_QUEUE = net.typoflash.managers.LoadQueue.global;
+    var Q = G.LOAD_QUEUE;
+    G.COOKIE = net.typoflash.datahandling.Cookie.global;
+    var C = G.COOKIE;
+    G.FONT_MANAGER = net.typoflash.managers.FontManager.global;
+    var FM = G.FONT_MANAGER;
+    G.CORE = this;
+    var qs = unescape(QUERY_STRING);
+    qs = qs.split('&');
+    var qv;
+    G.QUERY_STRING = {};
+    var i = 0;
+    while (i < qs.length) {
+      qv = qs[i].split('=');
+      if (qv[0] != '') {
+        G.QUERY_STRING[qv[0]] = qv[1];
+      }
+      ++i;
+    }
+    G.HISTORY_ENABLED = Boolean(unescape(HISTORY_ENABLED) == 1);
+    G.HOST_URL = unescape(HOST_URL);
+    G.REMOTING_RELAY_SOCKET = unescape(REMOTING_RELAY_SOCKET);
+    G.REMOTING_RELAY_PORT = Number(REMOTING_RELAY_PORT);
+    G.IS_LIVE = 1;
+    G.PAGE_ID = PAGE_ID;
+    G.INIT_PAGE_TITLE = unescape(TITLE);
+    G.SITE_TITLE = unescape(SITE_TITLE);
+    G.BE_USER = BE_USER;
+    G.HTTP_USER_AGENT = unescape(HTTP_USER_AGENT);
+    G.TYPO3_OS = unescape(TYPO3_OS);
+    if (L == 0 || Number(L) > 0) {
+      G.LANGUAGE = L;
+    } else {
+      G.LANGUAGE = 0;
+    }
+    G.RELAY_SERVER = G.HOST_URL + 'typo3conf/ext/remoting_relay/' + RELAY_SERVER;
+    System.useCodepage = CODE_PAGE;
+    Stage.scaleMode = SCALE_MODE;
+    Stage.align = ALIGN;
+    System.security.allowDomain('*');
+    System.exactSettings = false;
+    G.REMOTING_GATEWAY = G.HOST_URL + 'typo3conf/ext/flashremoting/amf.php';
+    G.SWX_GATEWAY = G.HOST_URL + 'typo3conf/ext/flashremoting/swx.php';
+    G.HOST_PATH = G.HOST_URL + 'uploads/tx_typoflash/';
+    G.ASSET_PATH = G.HOST_URL + 'typo3conf/ext/typoflash/assets/';
+    bg.beginFill(16777215, 100);
+    bg._y = -2000;
+    bg._x = -2000;
+    bg.lineStyle(0, 16777215, 0);
+    bg.moveTo(0, 0);
+    bg.lineTo(Stage.width + 5000, 0);
+    bg.lineTo(Stage.width + 5000, Stage.height + 5000);
+    bg.lineTo(0, Stage.height + 5000);
+    bg.endFill();
+    if (BG_COLOUR.length > 0) {
+      BG_COLOUR = unescape(BG_COLOUR);
+      var nc = (BG_COLOUR.split('#'))[1];
+      nc = parseInt('0x' + nc);
+      var col = new Color(bg);
+      col.setRGB(nc);
+    }
+    Q.setMinSteps(4);
+    Q.setIntervalMs(30);
+    Q.setTimeoutMs(4000);
+    G.LAYER.preloader = root.createEmptyMovieClip('preloader', depth.preloader);
+    var p = G.LAYER.preloader;
+    G.LAYER.assets = root.createEmptyMovieClip('assets', depth.assets);
+    var as = G.LAYER.assets;
+    as._x = 2500;
+    as._y = 3000;
+    as._visible = false;
+    var pre = G.HOST_PATH + unescape(PRELOADER);
+    SWFS_SIZE = unescape(SWFS_SIZE);
+    var fsList = SWFS_SIZE.split(',');
+    if (PRELOADER.length > 0) {
+      var pObj = {'url': pre, 'target': p, 'name': 'Preloader', 'filesize': fsList[0]};
+      Q.load(pObj);
+      var p = 1;
+    } else {
+      var p = 0;
+    }
+    var lObj;
+    var fList;
+    var f;
+    if (DYNAMIC_FONTS != null) {
+      DYNAMIC_FONTS = unescape(DYNAMIC_FONTS);
+      FM.addEventListener('onFontRegister', this);
+      if (SWFS_SIZE.length > 0) {
+        G.DYNAMIC_FONTS = DYNAMIC_FONTS.split(',');
+        fList = G.DYNAMIC_FONTS;
+        var lib;
+        f = 0;
+        while (f < fList.length) {
+          if (fList[f].length > 0 && fList[f] != null) {
+            ++p;
+            FM.loadFont(fList[f], f == fList.length - 1);
+          }
+          ++f;
+        }
+      }
+    }
+    G.FONT_LIST = [];
+    if (FONTS != null) {
+      FONTS = unescape(FONTS);
+      if (SWFS_SIZE.length > 0) {
+        G.SHARED_FONTS = FONTS.split(',');
+        fList = G.SHARED_FONTS;
+        f = 0;
+        while (f < fList.length) {
+          if (fList[f].length > 0 && fList[f] != null) {
+            lObj = {'url': G.HOST_PATH + fList[f], 'target': as, 'name': 'Shared Fonts', 'filesize': fsList[p]};
+            Q.load(lObj);
+            ++p;
+          }
+          ++f;
+        }
+      }
+    }
+    if (SWFS != null) {
+      SWFS = unescape(SWFS);
+      SWFS_SIZE = unescape(SWFS_SIZE);
+      if (SWFS_SIZE.length > 0) {
+        fList = SWFS.split(',');
+        f = 0;
+        while (f < fList.length) {
+          if (fList[f].length > 0 && fList[f] != null) {
+            lObj = {'url': G.HOST_PATH + fList[f], 'target': as, 'name': 'Assets', 'filesize': fsList[p]};
+            Q.load(lObj);
+            ++p;
+          }
+          ++f;
+        }
+      }
+    }
+    G.LAYER.template = root.createEmptyMovieClip('templates', depth.template);
+    var tmp = G.LAYER.template;
+    var tObj = {'url': G.HOST_PATH + TEMPLATE, 'target': tmp, 'name': 'TypoFlash template', 'filesize': fsList[fsList.length - 1]};
+    Q.load(tObj);
+    if (C.data.soundEnabled == null) {
+      C.setData('soundEnabled', 1);
+    }
+    if (C.data.highQuality == null) {
+      C.setData('highQuality', 1);
+    }
+    if (C.data.debugEnabled == null) {
+      C.setData('debugEnabled', 0);
+    }
+    if (C.data.storeFEuserdataEnabled == null) {
+      C.setData('storeFEuserdataEnabled', 0);
+    }
+    if (C.data.storeBEuserdataEnabled == null) {
+      C.setData('storeBEuserdataEnabled', 0);
+    }
+    if (C.data.autologinEnabled == null) {
+      C.setData('autologinEnabled', 0);
+    }
+    var pObj = {};
+    for (var v in _global.TF.QUERY_STRING) {
+      pObj[v] = _global.TF.QUERY_STRING[v];
+    }
+    pObj.id = PAGE_ID;
+    G.INIT_pOBJ = pObj;
+    var methodName = 'updateFlashHistory';
+    var instance = null;
+    var method = updateFlashHistory;
+    var wasSuccessful = flash.external.ExternalInterface.addCallback(methodName, instance, method);
+    methodName = 'externalEdit';
+    method = externalEdit;
+    flash.external.ExternalInterface.addCallback(methodName, instance, method);
+    if (C.data.debugEnabled) {
+      loadDebug();
+    }
+    if (C.data.editEnabled) {
+      loadEditor();
+    }
+    if (C.data.editEnabled) {
+      setAuthContext();
+    } else {
+      setNonAuthContext();
+    }
+    stop();
+    E.addEventListener('onBELoginStatus', this);
+    E.addEventListener('onDebugStatus', this);
+    E.addEventListener('onEditStatus', this);
+    E.addEventListener('onSoundStatus', this);
+    delete Q;
+    G;
+  }
+}

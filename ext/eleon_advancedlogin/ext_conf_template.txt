@@ -1,0 +1,2 @@
+  # cat=basic; type=string; label= Minutes to Session-Timeout: Time after BE-User will be kickt out of the Backend (minutes).
+timeout_minutes = 60

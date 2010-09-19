@@ -1,0 +1,277 @@
+/*
+[thmname]Eclipse 1.8
+[creator]Shuriken
+*/
+
+/** {
+margin: 0;
+padding: 0;
+font-family: "Trebuchet MS", sans-serif;
+}*/
+
+body {
+background-color: #FFF;
+/*background-image: url("gfx/body.png");*/
+/*background-repeat: repeat-x;
+background-attachment: fixed;
+text-align: center;*/
+}
+
+#wrap {
+width: 752px;
+border-color: #BBB #AAA #888 #999;
+border-style: solid;
+border-width: 0 2px 2px 2px;
+margin: 16px auto 16px auto;
+padding: 4px 4px 4px 4px;
+background-image: url("gfx/wrap.png");
+}
+
+
+h1 {
+border-color: #888 #999 #BBB #AAA;
+border-style: solid;
+border-width: 2px;
+padding: 17px 0 0 0;
+background-image: url("gfx/h1.png");
+color: #FFF;
+height: 53px;
+font-size: 23px;
+font-weight: normal;
+font-style: italic;
+margin: 0 0 4px 0;
+text-align: center;
+}
+
+h2
+{
+	border-color: #888 #999 #BBB #AAA;
+	border-style: solid;
+	border-width: 2px;
+	padding: 10px 0 0 0;
+	background-image: url("gfx/h1.png");
+	color: #FFF;
+	height: 27px;
+	font-size: 23px;
+	font-weight: normal;
+	font-style: italic;
+	margin: 0 0 4px 0;
+	text-align: center;
+}
+
+h1 b {
+font-size: 30px;
+font-weight: bold;
+font-style: normal;
+}
+
+.infobox {
+border-color: #888 #999 #BBB #AAA;
+border-style: solid;
+border-width: 2px;
+margin: 0 0 4px 0;
+padding: 4px;
+background-image: url("gfx/infobox.png");
+text-align: left;
+font-size: 12px;
+color: #333;
+}
+
+.infobox a {
+color: #0046C5;
+font-weight: bold;
+text-decoration: none;
+}
+
+.infobox a:hover {
+text-decoration: underline;
+}
+
+.infobox * {
+margin-top: 12px;
+}
+
+.infobox *:first-child {
+margin-top: 0;
+}
+
+.infobox h2 {
+font-size: 16px;
+font-weight: bold;
+}
+
+.infobox h3 {
+font-size: 14px;
+font-weight: bold;
+}
+
+.infobox h4,.infobox h5,.infobox h6 {
+font-size: 12px;
+font-weight: bold;
+}
+
+#files {
+border-color: #888 #999 #BBB #AAA;
+border-style: solid;
+border-width: 2px;
+margin: 0 0 4px 0;
+padding: 4px 4px 0px 4px;
+background-image: url("gfx/infobox.png");
+text-align: left;
+color: #555;
+font-size: 12px;
+}
+
+#list {
+border-collapse: collapse;
+width: 100%;
+margin-bottom: 4px;
+}
+
+#list * span {
+display: block;
+padding: 4px;
+height: 14px;
+}
+
+#list th span {
+background-color: #666;
+color: #FFF;
+text-align: left;
+border-color: #888 #555 #444 #777;
+border-style: solid;
+border-width: 1px;
+font-weight: bold;
+}
+
+#list td span {
+background-color: #BBB;
+border-color: #DDD #AAA #999 #CCC;
+border-style: solid;
+border-width: 1px;
+}
+
+#list td a {
+color: #333;
+font-weight: bold;
+display: block;
+margin: -4px;
+padding: 4px 4px 4px 24px;
+background-color: #BBB;
+text-decoration: none;
+background-repeat: no-repeat;
+background-position: 3px 3px;
+}
+
+#list td a:hover {
+background-color: #CCC;
+}
+
+#list tr:hover td span, #list tr:hover td span a {
+background-color: #CCC;
+border-color: #EEE #BBB #AAA #DDD;
+}
+
+.file {
+background-image: url("gfx/file.gif");
+}
+
+.dir {
+background-image: url("gfx/dir.gif");
+}
+
+#nav {
+margin: -4px -4px 4px -4px;
+border-bottom: 2px solid #888;
+background-color: #B4B4B4;
+padding: 6px 4px 6px 30px;
+background-image: url("gfx/path.gif");
+background-repeat: no-repeat;
+background-position: 9px 6px;
+color: #777;
+}
+
+#nav #path {
+float: left;
+}
+
+#nav #path a {
+text-decoration: none;
+display: inline;
+margin: 0;
+padding: 0;
+background-color: transparent;
+border: none;
+font-size: 13px;
+color: #444;
+}
+
+#nav #path a:hover {
+color: #000;
+text-decoration: underline;
+background-color: transparent;
+}
+
+#nav #filecount {
+display: block;
+float: right;
+padding-top: 2px;
+font-size: 11px;
+color: #777;
+margin-right: 6px;
+}
+
+#nav #filecount #totalsize {
+font-size: 11px;
+}
+
+.cl {
+display: block;
+clear: both;
+}
+
+#nofiles {
+border-color: #888 #999 #BBB #AAA;
+border-style: solid;
+border-width: 1px;
+color: #555;
+font-size: 13px;
+display: block;
+background-color: #AAA;
+margin: 0 0 4px 0;
+height: 15px;
+padding: 5px 4px 4px 24px;
+}
+
+#gentime {
+float: left;
+width: 252px;
+height: 36px;
+line-height: 36px;
+font-size: 11px;
+padding-right: 48px;
+background-image: url("gfx/gentime.gif");
+color: #FFF;
+}
+
+#credits {
+float: right;
+font-size: 11px;
+background-image: url("gfx/cred.gif");
+width: 252px;
+height: 36px;
+line-height: 36px;
+padding: 0 0 0 48px;
+color: #CCC;
+}
+
+#credits a {
+margin-right: 4px;
+font-weight: bold;
+color: #FFF;
+text-decoration: none;
+}
+
+#credits a:hover {
+text-decoration: underline;
+}

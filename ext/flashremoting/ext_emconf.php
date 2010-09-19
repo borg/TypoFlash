@@ -1,0 +1,47 @@
+<?php
+
+########################################################################
+# Extension Manager/Repository config file for ext: "flashremoting"
+#
+# Auto generated 29-07-2009 14:53
+#
+# Manual updates:
+# Only the data in the array - anything else is removed by next write.
+# "version" and "dependencies" must not be touched!
+########################################################################
+
+$EM_CONF[$_EXTKEY] = array(
+	'title' => 'Flash remoting',
+	'description' => 'Installs the AMFPHP flash remoting & SWX RPC library',
+	'category' => 'services',
+	'author' => 'Andreas Borg',
+	'author_email' => 'borg@elevated.to',
+	'shy' => '',
+	'dependencies' => 'cms',
+	'conflicts' => '',
+	'priority' => '',
+	'module' => '',
+	'state' => 'beta',
+	'internal' => '',
+	'uploadfolder' => 0,
+	'createDirs' => '',
+	'modify_tables' => '',
+	'clearCacheOnLoad' => 1,
+	'lockType' => '',
+	'author_company' => '',
+	'version' => '0.8.0',
+	'_md5_values_when_last_written' => 'a:165:{s:15:"BaseService.php";s:4:"68af";s:18:"License_Amfphp.txt";s:4:"eb72";s:17:"Readme_Amfphp.txt";s:4:"859c";s:16:"SwxAssembler.php";s:4:"2305";s:7:"amf.php";s:4:"373c";s:12:"debugger.php";s:4:"f582";s:12:"ext_icon.gif";s:4:"ae1e";s:24:"ext_typoscript_setup.txt";s:4:"d41d";s:11:"globals.php";s:4:"15e6";s:8:"json.php";s:4:"fed3";s:36:"list_of_amfphp_files_and_folders.txt";s:4:"1677";s:7:"swx.php";s:4:"bca6";s:14:"swx_config.php";s:4:"6bc4";s:10:"xmlrpc.php";s:4:"729e";s:21:"analyzer/analyzer.swf";s:4:"5e97";s:19:"analyzer/index.html";s:4:"f2c6";s:15:"analyzer/ufo.js";s:4:"2df1";s:29:"analyzer/assets/header_01.jpg";s:4:"e1d8";s:29:"analyzer/assets/header_02.png";s:4:"a32f";s:29:"analyzer/assets/header_04.jpg";s:4:"562a";s:19:"core/amf/readme.txt";s:4:"34c3";s:24:"core/amf/app/Actions.php";s:4:"e90d";s:24:"core/amf/app/Filters.php";s:4:"c340";s:24:"core/amf/app/Gateway.php";s:4:"bfe7";s:35:"core/amf/io/AMFBaseDeserializer.php";s:4:"231b";s:33:"core/amf/io/AMFBaseSerializer.php";s:4:"3db7";s:31:"core/amf/io/AMFDeserializer.php";s:4:"6438";s:29:"core/amf/io/AMFSerializer.php";s:4:"1871";s:27:"core/amf/util/AMFObject.php";s:4:"879b";s:29:"core/amf/util/DateWrapper.php";s:4:"fa59";s:33:"core/amf/util/DescribeService.php";s:4:"a955";s:32:"core/amf/util/PageAbleResult.php";s:4:"dfe6";s:29:"core/amf/util/TraceHeader.php";s:4:"b3e9";s:32:"core/amf/util/WrapperClasses.php";s:4:"4693";s:25:"core/json/app/Actions.php";s:4:"5534";s:25:"core/json/app/Gateway.php";s:4:"c42e";s:41:"core/shared/adapters/RecordSetAdapter.php";s:4:"2caa";s:37:"core/shared/adapters/adodbAdapter.php";s:4:"3308";s:40:"core/shared/adapters/doctrineAdapter.php";s:4:"d0bf";s:37:"core/shared/adapters/fbsqlAdapter.php";s:4:"4285";s:40:"core/shared/adapters/informixAdapter.php";s:4:"70c7";s:37:"core/shared/adapters/mssqlAdapter.php";s:4:"6a67";s:37:"core/shared/adapters/mysqlAdapter.php";s:4:"50a1";s:38:"core/shared/adapters/mysqliAdapter.php";s:4:"ed19";s:44:"core/shared/adapters/mysqliobjectAdapter.php";s:4:"9fbe";s:36:"core/shared/adapters/oci8Adapter.php";s:4:"0d24";s:36:"core/shared/adapters/odbcAdapter.php";s:4:"61e7";s:35:"core/shared/adapters/pdoAdapter.php";s:4:"11a9";s:38:"core/shared/adapters/peardbAdapter.php";s:4:"8a98";s:37:"core/shared/adapters/pgsqlAdapter.php";s:4:"bb19";s:46:"core/shared/adapters/plainrecordsetAdapter.php";s:4:"583d";s:38:"core/shared/adapters/sqliteAdapter.php";s:4:"d311";s:44:"core/shared/adapters/sqliteobjectAdapter.php";s:4:"3a14";s:39:"core/shared/adapters/zendrowAdapter.php";s:4:"be4e";s:42:"core/shared/adapters/zendrowsetAdapter.php";s:4:"21a5";s:32:"core/shared/app/BasicActions.php";s:4:"41bf";s:32:"core/shared/app/BasicGateway.php";s:4:"4c94";s:29:"core/shared/app/Constants.php";s:4:"3a2f";s:27:"core/shared/app/Globals.php";s:4:"0218";s:33:"core/shared/app/php4Executive.php";s:4:"0dea";s:33:"core/shared/app/php5Executive.php";s:4:"1656";s:42:"core/shared/exception/MessageException.php";s:4:"122f";s:39:"core/shared/exception/php4Exception.php";s:4:"e8c1";s:39:"core/shared/exception/php5Exception.php";s:4:"8107";s:33:"core/shared/util/Authenticate.php";s:4:"4d68";s:35:"core/shared/util/CharsetHandler.php";s:4:"a684";s:31:"core/shared/util/CompatPhp4.php";s:4:"0e6b";s:31:"core/shared/util/CompatPhp5.php";s:4:"44cc";s:28:"core/shared/util/Headers.php";s:4:"711e";s:25:"core/shared/util/JSON.php";s:4:"0217";s:32:"core/shared/util/MessageBody.php";s:4:"f291";s:34:"core/shared/util/MessageHeader.php";s:4:"0309";s:32:"core/shared/util/MethodTable.php";s:4:"1cfa";s:29:"core/shared/util/NetDebug.php";s:4:"0162";s:30:"core/shared/util/functions.php";s:4:"2585";s:27:"core/xmlrpc/app/Actions.php";s:4:"6afc";s:27:"core/xmlrpc/app/Gateway.php";s:4:"ea4c";s:31:"explorer/SwxServiceExplorer.swf";s:4:"243d";s:19:"explorer/index.html";s:4:"47a4";s:28:"explorer/services-config.xml";s:4:"360d";s:15:"explorer/ufo.js";s:4:"2df1";s:29:"explorer/assets/header_01.jpg";s:4:"23be";s:29:"explorer/assets/header_02.png";s:4:"ff44";s:29:"explorer/assets/header_04.jpg";s:4:"a05b";s:16:"lib/Profiler.php";s:4:"ea13";s:16:"lib/Validate.php";s:4:"5933";s:24:"lib/http_build_query.php";s:4:"20a9";s:17:"lib/str_split.php";s:4:"a8c5";s:24:"lib/ezsql/change_log.htm";s:4:"c3d6";s:25:"lib/ezsql/ez_sql_help.htm";s:4:"d84f";s:33:"lib/ezsql/ez_sql_with_smarty.html";s:4:"018d";s:20:"lib/ezsql/readme.txt";s:4:"adae";s:24:"lib/ezsql/mysql/demo.php";s:4:"1ce5";s:38:"lib/ezsql/mysql/disk_cache_example.php";s:4:"c90e";s:32:"lib/ezsql/mysql/ez_sql_mysql.php";s:4:"4578";s:28:"lib/ezsql/oracle8_9/demo.php";s:4:"90a7";s:42:"lib/ezsql/oracle8_9/disk_cache_example.php";s:4:"4433";s:40:"lib/ezsql/oracle8_9/ez_sql_oracle8_9.php";s:4:"fd36";s:32:"lib/ezsql/shared/ez_sql_core.php";s:4:"089c";s:55:"lib/ezsql/shared/ez_sql_core_2.1_debughack_0.2alpha.php";s:4:"e123";s:43:"lib/ezsql/shared/ez_sql_core_202console.php";s:4:"88c2";s:46:"lib/ezsql/shared/readme_debughack_0.2alpha.txt";s:4:"afa5";s:25:"lib/ezsql/sqlite/demo.php";s:4:"b979";s:34:"lib/ezsql/sqlite/ez_sql_sqlite.php";s:4:"9ae2";s:31:"lib/ezsql/sqlite/sqlite_test.db";s:4:"2f14";s:27:"lib/phpFlickr/ChangeLog.txt";s:4:"1a15";s:24:"lib/phpFlickr/README.txt";s:4:"3fbe";s:22:"lib/phpFlickr/auth.php";s:4:"db46";s:25:"lib/phpFlickr/example.php";s:4:"dd06";s:26:"lib/phpFlickr/getToken.php";s:4:"42a5";s:27:"lib/phpFlickr/phpFlickr.php";s:4:"edb2";s:25:"lib/phpFlickr/PEAR/DB.php";s:4:"34a9";s:27:"lib/phpFlickr/PEAR/PEAR.php";s:4:"8ad8";s:32:"lib/phpFlickr/PEAR/DB/common.php";s:4:"5100";s:31:"lib/phpFlickr/PEAR/DB/mysql.php";s:4:"331e";s:31:"lib/phpFlickr/PEAR/DB/pgsql.php";s:4:"bbdc";s:33:"lib/phpFlickr/PEAR/DB/storage.php";s:4:"06ae";s:35:"lib/phpFlickr/PEAR/HTTP/Request.php";s:4:"e85d";s:44:"lib/phpFlickr/PEAR/HTTP/Request/Listener.php";s:4:"4f70";s:33:"lib/phpFlickr/PEAR/Net/Socket.php";s:4:"567d";s:30:"lib/phpFlickr/PEAR/Net/URL.php";s:4:"a7ee";s:38:"lib/typo3/class.flashremoting_base.php";s:4:"9a43";s:44:"lib/typo3/class.flashremoting_beuserauth.php";s:4:"cd78";s:44:"lib/typo3/class.flashremoting_feuserauth.php";s:4:"80b9";s:22:"lib/typo3/includes.php";s:4:"30cf";s:19:"lib/typo3/index.php";s:4:"305e";s:19:"services/Flickr.php";s:4:"3fb6";s:18:"services/Jaiku.php";s:4:"6153";s:21:"services/Nabaztag.php";s:4:"c57b";s:18:"services/Numpa.php";s:4:"e843";s:19:"services/Simple.php";s:4:"6ec5";s:26:"services/TestDataTypes.php";s:4:"9091";s:29:"services/TheTenWordReview.php";s:4:"dcdf";s:20:"services/Twitter.php";s:4:"8666";s:18:"services/index.php";s:4:"7b75";s:36:"services/amfphp/DiscoveryService.php";s:4:"3309";s:25:"services/_idvr/config.ini";s:4:"1640";s:26:"services/_idvr/filters.php";s:4:"bb76";s:28:"services/_idvr/functions.php";s:4:"5c31";s:24:"services/_idvr/index.php";s:4:"d41d";s:26:"services/_idvr/infobox.php";s:4:"179a";s:29:"services/_idvr/showsource.php";s:4:"d4a5";s:36:"services/_idvr/languages/english.ini";s:4:"7917";s:36:"services/_idvr/languages/finnish.ini";s:4:"b4da";s:36:"services/_idvr/languages/swedish.ini";s:4:"a6fc";s:37:"services/_idvr/themes/aral/styles.css";s:4:"0647";s:39:"services/_idvr/themes/aral/gfx/body.png";s:4:"81a5";s:39:"services/_idvr/themes/aral/gfx/cred.gif";s:4:"c6b1";s:38:"services/_idvr/themes/aral/gfx/dir.gif";s:4:"1782";s:39:"services/_idvr/themes/aral/gfx/file.gif";s:4:"d864";s:42:"services/_idvr/themes/aral/gfx/gentime.gif";s:4:"5925";s:37:"services/_idvr/themes/aral/gfx/h1.png";s:4:"e726";s:42:"services/_idvr/themes/aral/gfx/infobox.png";s:4:"9d99";s:39:"services/_idvr/themes/aral/gfx/path.gif";s:4:"1d06";s:39:"services/_idvr/themes/aral/gfx/wrap.png";s:4:"2a5b";s:40:"services/_idvr/themes/eclipse/styles.css";s:4:"f7c7";s:42:"services/_idvr/themes/eclipse/gfx/body.png";s:4:"81a5";s:42:"services/_idvr/themes/eclipse/gfx/cred.gif";s:4:"c6b1";s:41:"services/_idvr/themes/eclipse/gfx/dir.gif";s:4:"1782";s:42:"services/_idvr/themes/eclipse/gfx/file.gif";s:4:"d864";s:45:"services/_idvr/themes/eclipse/gfx/gentime.gif";s:4:"5925";s:40:"services/_idvr/themes/eclipse/gfx/h1.png";s:4:"e726";s:45:"services/_idvr/themes/eclipse/gfx/infobox.png";s:4:"9d99";s:42:"services/_idvr/themes/eclipse/gfx/path.gif";s:4:"1d06";s:42:"services/_idvr/themes/eclipse/gfx/wrap.png";s:4:"2a5b";}',
+	'constraints' => array(
+		'depends' => array(
+			'cms' => '',
+		),
+		'conflicts' => array(
+		),
+		'suggests' => array(
+		),
+	),
+	'suggests' => array(
+	),
+);
+
+?>

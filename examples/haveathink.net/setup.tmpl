@@ -1,0 +1,153 @@
+config.linkVars = L,flash,print
+
+config.sys_language_uid = 0
+config.language = en
+config.locale_all = en_GB
+
+config.sys_language_overlay = 1
+config.sys_language_mode = content_fallback
+
+page = PAGE
+page.typeNum = 0
+page.10 = USER
+page.10.userFunc = tx_templavoila_pi1->main_page
+
+
+config.doctype = xhtml_strict
+config.xhtml_cleaning = all
+config.xmlprologue = none
+
+page.headerData.10 = TEXT
+page.headerData.10.value (
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="icon" type="image/ico" href="/favicon.ico" />
+)
+
+
+
+lib.menu  =HMENU 
+#First level menu-object,textual
+lib.menu.1 =TMENU 
+
+lib.menu.1 {
+
+	#Normal state properties
+	#NO.allWrap= <td class="entry{elementUid}"><p>&#124;</p></td><td class="l1-no">|</td>
+	#NO.stdWrap.dataWrap = <td class="l1-act"><a href="index.php?id={page:uid}&amp;flash=0">|</a></td><td><p>&#124;</p></td>
+	NO.allStdWrap.dataWrap = <li class="l1-no {page:alias} {field:alias}">|</li>
+	NO.stdWrap.dataWrap.insertData = 1 
+	NO.stdWrap.htmlSpecialChars =1 
+	NO.subst_elementUid = 1
+
+	#Enable active state and set properties:
+
+	ACT =1 
+	ACT.stdWrap.htmlSpecialChars =1 
+	ACT.allStdWrap.dataWrap = <li class="l1-act {page:alias} {field:alias}">|</li>
+	ACT.stdWrap.dataWrap.insertData = 1 
+	#ACT.ATagBeforeWrap = 0
+	ACT.subst_elementUid = 1
+	#ACT.ATagParams = class="{page:alias}"
+	ACT.noLink = 1 
+	ACT.insertData = 1
+
+	expAll = 1
+	wrap = <div id="menutable"><ul>|</ul></div>
+
+}
+
+lib.menu.2 =TMENU 
+
+lib.menu.2 {
+
+	#Normal state properties
+	NO.allStdWrap.dataWrap = <li class="l2-no {page:alias} {field:alias}">|</li>
+	NO.stdWrap.dataWrap.insertData = 1 
+	NO.stdWrap.htmlSpecialChars =1 
+	NO.subst_elementUid = 1
+
+	#Enable active state and set properties:
+
+	ACT =1 
+	ACT.stdWrap.htmlSpecialChars =1 
+	ACT.allStdWrap.dataWrap = <li class="l2-act {page:alias} {field:alias}">|</li>
+	ACT.stdWrap.dataWrap.insertData = 1 
+	#ACT.ATagBeforeWrap = 0
+	ACT.subst_elementUid = 1
+	#ACT.ATagParams = class="{page:alias}"
+	ACT.noLink = 1 
+	ACT.insertData = 1
+
+	expAll = 0
+	wrap = <ul class="submenu">|</ul>
+
+}
+
+#config.simulateStaticDocuments = 1 
+config.simulateStaticDocuments_pEnc = md5 
+config.simulateStaticDocuments_pEnc_onlyP = tx_ttnews[backPid], tx_ttnews,tx_ttnews[tt_news], tt_news, cHash, L, print, pS, pL, arc, tx_ttnews[cat], begin_at, swords,type
+config.simulateStaticDocuments_noTypeIfNoTitle =1
+
+
+
+plugin.tt_news {
+
+  displayCatMenu {
+    #mode = nestedWraps
+    catmenuIconMode = -1
+    # wrap for the complete "catmenu"
+    catmenu_stdWrap.wrap = <div class="news-catmenu">|</div>
+       # wrap for level "n"
+    #catmenuLevel1_stdWrap.wrap = <div class="level1">|</div>
+    #catmenuLevel2_stdWrap.wrap = <div class="level2">|</div>
+    #catmenuLevel3_stdWrap.wrap = <div class="level3">|</div>
+    #catmenuLevel4_stdWrap.wrap = <div class="level4">|</div>
+    
+    catmenuItem_NO_stdWrap.wrap = <div class="catmenu-no"><img src="clear.gif" />|</div>
+    catmenuItem_ACT_stdWrap.wrap = <div class="catmenu-act"><img src="clear.gif" />|</div>
+  }
+	catSelectorTargetPid = 8
+}
+
+
+plugin.tt_news._CSS_DEFAULT_STYLE >
+lib.categories < styles.content.get
+
+lib.categories {
+    select.pidInList = 7
+    select.orderBy = sorting
+}
+
+
+
+
+
+
+# Footer menu
+lib.foot = HMENU 
+lib.foot.special = directory
+lib.foot.special.value = 13
+#First level menu-object,textual
+lib.foot.1 =TMENU 
+lib.foot.1.wrap = <div id="footmenu">|<div class="foot"> <p>Copyright &copy; 2009 HaveAThink.net </p></div><div class="foot"><p> Donated by <a href="http://elevated.to" target="_blank">Elevated</a></p></div></div>
+lib.foot.1 {
+	#Normal state properties
+	NO.allWrap =<div class="foot">|</div>
+	NO.stdWrap.htmlSpecialChars =1 
+	NO.subst_elementUid = 1
+	NO.fontColor=#FFFFFF
+	#Enable active state and set properties:
+
+	ACT =0 
+
+}
+
+lib.footer = COA
+lib.footer.10 = TEXT
+lib.footer.10.value = 
+lib.footer.20 < lib.srch
+lib.footer.30 < lib.foot
+
+
+
+

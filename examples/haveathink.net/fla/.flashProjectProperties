@@ -1,0 +1,33 @@
+<projectDescription>
+  <id>1250022237055</id>
+  <name>HaveAProject</name>
+  <asVersion>0</asVersion>
+  <boundTemplate>file:///C|/Users/Andreas Borg/AppData/Local/Adobe/Flash CS4/en/Configuration/Project/templates/boundClass_as3.as</boundTemplate>
+  <classTemplate>file:///C|/Users/Andreas Borg/AppData/Local/Adobe/Flash CS4/en/Configuration/Project/templates/standardClass_as3.as</classTemplate>
+  <classPath>.</classPath>
+  <defaultApp>file:///C|/PROJECTS/HAVEATHINK.NET/work/fla/haveatemplate.fla</defaultApp>
+  <rootURI>file:///C|/PROJECTS/HAVEATHINK.NET/work/fla/</rootURI>
+  <flexSDK/>
+  <sources editable="false"/>
+  <libraries editable="false"/>
+  <externalLibraries editable="false"/>
+  <compileList editable="false">
+    <uri label="haveanewscomponent.fla">file:///C|/PROJECTS/HAVEATHINK.NET/work/fla/haveanewscomponent.fla</uri>
+    <uri label="haveatemplate.fla">file:///C|/PROJECTS/HAVEATHINK.NET/work/fla/haveatemplate.fla</uri>
+    <uri label="editor9.fla">file:///C|/PROJECTS/TYPO3_EXT/FLASH SOURCE/typoflash/pi1/editor9.fla</uri>
+    <uri label="core9_as3.fla">file:///C|/PROJECTS/TYPO3_EXT/FLASH SOURCE/typoflash/pi1/core9_as3.fla</uri>
+    <uri label="editor9.fla">file:///C|/PROJECTS/TYPOFLASH_1.0/fla/ext/typoflash/pi1/editor9.fla</uri>
+    <uri label="core9_as3.fla">file:///C|/PROJECTS/TYPOFLASH_1.0/fla/ext/typoflash/pi1/core9_as3.fla</uri>
+  </compileList>
+  <recentFiles editable="false">
+    <uri label="haveanewscomponent.fla">file:///C|/PROJECTS/HAVEATHINK.NET/work/fla/haveanewscomponent.fla</uri>
+    <uri label="haveatemplate.fla">file:///C|/PROJECTS/HAVEATHINK.NET/work/fla/haveatemplate.fla</uri>
+    <uri label="core9_as3.fla">file:///C|/PROJECTS/TYPOFLASH_1.0/fla/ext/typoflash/pi1/core9_as3.fla</uri>
+    <uri label="editor9.fla">file:///C|/PROJECTS/TYPOFLASH_1.0/fla/ext/typoflash/pi1/editor9.fla</uri>
+    <uri label="editor9.fla">file:///C|/PROJECTS/TYPO3_EXT/FLASH SOURCE/typoflash/pi1/editor9.fla</uri>
+    <uri label="core9_as3.fla">file:///C|/PROJECTS/TYPO3_EXT/FLASH SOURCE/typoflash/pi1/core9_as3.fla</uri>
+  </recentFiles>
+  <locations editable="true">
+    <uri label="pi1">file:///C|/PROJECTS/TYPOFLASH_1.0/fla/ext/typoflash/pi1/</uri>
+  </locations>
+</projectDescription>

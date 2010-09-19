@@ -1,0 +1,6 @@
+
+  # cat=basic; type=string; label=charset: Specify the charset of the tables in the database. Enter here the same what you have used with the UPDATE! import function.
+charset = utf-8
+
+  # cat=basic/enable; type=boolean; label=Use patch 1822: Install this patch from bugs.typo3.org or install the extension patch1822 to have an advanced page module
+usePatch1822 = 

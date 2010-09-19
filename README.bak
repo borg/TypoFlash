@@ -5,7 +5,7 @@ TypoFlash is an ActionScript framework to make Typo3 a Flash CMS developed by An
 2. AS2 and AS3 (Flash player version 9) codebase
 3. initial GUI framework for Flash frontend editing 
 
-The frontend editing framework is not finished, but everything needed for content rendering is there. I am releasing the code since I spent years refining it and a lot of thought and planning went into the project. I hope it can continue to grow. I am releasing it since I get frequent requests about TypoFlash and it would be a shame for it to go waste. However, this stuff may not work out of the box because what I have done is gathered bits and pieces from my harddrive and not really tested it for a while. Having said that, the main reason the framework would break is if typo3 database structure has changed, but that has not happened for a few years. So here is a very short and rough guide how to get up and running.
+The framework is not finished, but I am currently more interested in working with digital installations and physical interactivity than waiting for websites to load. I am releasing the code since I spent years refining it and a lot of though and planning went into the project. I hope it can continue to grow. I am releasing it since I get frequent requests about TypoFlash and it would be a shame for it to go waste. However, this stuff may not work out of the box because what I have done is gathered bits and pieces from my harddrive and not really tested it for a while. Having said that, the main reason the framework would break is if typo3 database structure has changed, but that has not happened for a few years. So here is a very short and rough guide how to get up and running.
 
 1. Upload and install extensions
 
@@ -17,7 +17,7 @@ TemplaVoila!  			templavoila  	1.3.4
 News				tt_news		2.5.2
 Media (DAM) for TypoFlash  	dam  	1.1.1b
 
-I have had some issues with static tables as well so have supplied a version that I think works
+I have had quick some issues with static tables as well so have supplied a version that I think works
 
 
 
